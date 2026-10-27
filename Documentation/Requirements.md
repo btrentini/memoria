@@ -283,3 +283,12 @@ Status: Not started → Implemented → Verified, or Blocked externally / Unavai
 | BG.02 | Run without a Dock icon or initial monitor window | LSUIElement; shared accessory lifecycle; suppressed launch scene | 1 | App Store live launch and menu/window lifecycle | Evidence/BackgroundVerification.json | Verified in local App Store preview; direct UI pending |
 | BG.03 | Continue monitoring after closing the window | Application delegate and persistent menu-bar scene | 1 | Open/close monitor and observe continued menu readings | Evidence/BackgroundVerification.json | Verified in local App Store preview |
 | BG.04 | Optional native login startup and Dock visibility | MemoriaLifecycle; mainApp registration; preferences and revocation states | 1 | Five lifecycle policy tests; settings UI check | Evidence/BackgroundVerification.json | Implemented; policy tests verified; permanent installation/login test blocked externally |
+
+## User installation and contributor onboarding
+
+| ID | Requirement | Implementation | Tier | Tests | Evidence | Status |
+|---|---|---|---|---|---|---|
+| U.01 | User instructions first, developer/contributor instructions second | README.md; CONTRIBUTING.md | 1 | Local link and command review | Documentation source | Implemented |
+| U.02 | Complete development app with executable permissions and portable libraries | Makefile; Scripts/doctor.py; Scripts/verify-app.py | 1 | Clean-checkout app/test workflow and bundle verification | Per-preview build manifest and release notes | Implemented |
+| U.03 | Finder installation ZIP with provenance and checksums | Scripts/package-preview.py; Scripts/build_support.py | 1 | Dirty/stale/partial rejection; archive extraction and integrity | Per-preview manifest; unsigned preview is not a production-release pass | Implemented |
+| U.04 | Normal signed consumer installation | Documentation/Distribution.md | 1 | Developer ID, notarisation, external Gatekeeper and installation checks | Signing credentials absent; full installation acceptance pending | Blocked externally |

@@ -5,9 +5,17 @@ import os
 import plistlib
 import shutil
 import subprocess
+import json
+from build_support import source_fingerprint
 
 root=Path(__file__).resolve().parent.parent
 source=Path(os.environ.get("MEMORIA_BUILD_DIR",str(root/"build/direct"))).resolve()
+metadata_path=source/"build-metadata.json"
+if not metadata_path.is_file():
+    raise SystemExit("Build provenance is missing. Run make app before bundling.")
+metadata=json.loads(metadata_path.read_text())
+if metadata.get("sourceFingerprint") != source_fingerprint(root):
+    raise SystemExit("Build inputs changed. Rebuild before bundling.")
 app=root/"build/Memoria.app"
 # This generated path contains no user data. Start clean so removed extensions
 # or libraries cannot survive from an earlier development build.
@@ -39,6 +47,7 @@ plist.pop("CFBundleIconName",None)
 (app/"Contents/Info.plist").write_bytes(plistlib.dumps(plist))
 resources=app/"Contents/Resources"
 resources.mkdir(parents=True,exist_ok=True)
+shutil.copy2(metadata_path,resources/"BuildManifest.json")
 shutil.copy2(root/"Branding/Exports/Memoria-Default.icns",resources/"Memoria.icns")
 for name in sorted(p.name for p in (root/"App/Resources").glob("*.png")):
     shutil.copy2(root/"App/Resources"/name,resources/name)

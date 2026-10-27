@@ -16,6 +16,12 @@ Memoria is a native performance monitor and process manager for ARM64 Macs runni
 - A separate sandboxed monitoring edition and App Store submission template. The template is not ready for upload: developer signing, provisioning and listing details remain pending.
 - An isolated experimental sensor worker and an optional authenticated administrator helper, both disabled by default. Missing signing configuration fails closed. Endpoint Security remains conditional on Apple's approval.
 
+## User and contributor onboarding
+
+The README begins with user installation and menu-bar instructions, then covers development and contributions. A downloadable experimental ZIP is prepared separately from the source archives, with Finder installation instructions, a source manifest and checksums. It retains the signing and runtime limitations below.
+
+New `make doctor`, `make app`, `make test`, `make verify-app` and `make preview-package` commands provide a consistent development workflow. The preview packager rejects uncommitted, stale or partial builds and verifies the extracted application’s executable permissions and bundle integrity. [CONTRIBUTING.md](../CONTRIBUTING.md) covers review, tests and publication privacy.
+
 ## Verification and remaining gates
 
 The SDK-explicit Swift/C builds, Swift tests, native workload checks, Rust tests and vendor-integrity results are described in [Verification.md](Verification.md). [PublicationChecks.json](../Evidence/PublicationChecks.json) records checks repeated against the publishing checkout. Build success does not establish live UI behaviour.

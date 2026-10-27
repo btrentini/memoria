@@ -10,6 +10,19 @@ Before archiving, complete the native/worker/helper gates, pin included dependen
 
 No valid signing identity was visible initially. Signing, notarisation, stapling, external Gatekeeper behaviour, upgrade and uninstall remain unverified.
 
+## Experimental GitHub preview
+
+A preview can be shared before Developer ID credentials exist, provided its limitations remain explicit. From a clean committed checkout:
+
+    MEMORIA_CONFIGURATION=Release make app test
+    make preview-package
+
+`build/distribution` contains the versioned ZIP, manifest and SHA256SUMS.txt. The package uses an ad-hoc development signature; it is not notarised or production-ready. The script checks build provenance, archive integrity and executable permissions after extraction. It never uploads or changes Gatekeeper settings.
+
+Publish these three files as assets of a GitHub **pre-release**, tied to the exact source commit in the manifest. The release description must name the tested configuration and outstanding GUI, installation and signed-capability gates. Link users to the release assets, not GitHub’s automatic source archives. Keep build products out of Git.
+
+The package includes Finder installation, update and removal instructions. Users may need Apple’s app-specific approval flow; managed systems can disallow it. A regular signed download remains a separate release gate.
+
 ## Helper lifecycle
 
 Registration is only available from Settings. macOS may require approval in System Settings. Registration does not confer a standing right to terminate processes: every request has a separately authorised target. Removal is available from Settings and should precede deleting the installed app. Signed installation, denied/revoked approval, interrupted XPC, upgrade mismatch and removal need isolated testing.

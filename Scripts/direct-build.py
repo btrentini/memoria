@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from build_support import source_fingerprint, write_build_metadata
 
 root = Path(__file__).resolve().parent.parent
 developer = Path(os.environ.get("DEVELOPER_DIR", "/Applications/Xcode.app/Contents/Developer"))
@@ -11,18 +12,24 @@ toolchain = developer/"Toolchains/XcodeDefault.xctoolchain/usr/bin"
 sdk = developer/"Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
 output = Path(os.environ.get("MEMORIA_BUILD_DIR",str(root/"build/direct"))).resolve()
 output.mkdir(parents=True, exist_ok=True)
+configuration = os.environ.get("MEMORIA_CONFIGURATION", "Debug")
+if configuration not in {"Debug", "Release"}:
+    raise SystemExit("MEMORIA_CONFIGURATION must be Debug or Release.")
+# A failed or interrupted rebuild must never retain a success manifest.
+(output / "build-metadata.json").unlink(missing_ok=True)
 log = output/"build.log"
 swift = toolchain/"swiftc"
 flags = ["-whole-module-optimization","-swift-version","6","-target","arm64-apple-macosx26.0","-sdk",str(sdk),
          "-module-cache-path",str(Path(os.environ.get("MEMORIA_MODULE_CACHE", str(output/"module-cache")))),"-I",str(output),
          "-I",str(root/"Sources/MemoriaNative/include"),"-L",str(output),
          "-strict-concurrency=complete","-warnings-as-errors"]
-if os.environ.get("MEMORIA_CONFIGURATION") == "Release":
+if configuration == "Release":
     flags += ["-O"]
 # Compiler subprocesses still inherit the session's filesystem sandbox. This
 # opt-in avoids nesting Apple's macro sandbox inside an existing sandbox.
 if os.environ.get("MEMORIA_NESTED_SANDBOX") == "1":
     flags.append("-disable-sandbox")
+fingerprint = source_fingerprint(root)
 resume = os.environ.get("MEMORIA_BUILD_FROM")
 skipping = bool(resume)
 
@@ -66,4 +73,5 @@ for name,folder,links,parse in [
     skipping = False
     run([swift,*flags,*parse,"-module-name",name,"-Xlinker","-rpath","-Xlinker","@executable_path",
          *links,*([root/"App/BrandMark.swift"] if folder=="Widget" else []),*sorted((root/folder).glob("*.swift")),"-o",output/name])
+write_build_metadata(root, output, configuration, fingerprint, complete=not bool(resume))
 print(f"Development executables built in {output}. No signing or distribution verification is implied.")

@@ -2,7 +2,16 @@
 
 The project targets ARM64 macOS 26.0 and Swift 6 language mode. The inspected installation reported Xcode 27.1 (27A9275), SDK 27.0, Swift 6.4 and macOS 26.7.1 (25G241). Hardware-model discovery was denied in this execution context. M2 Pro compatibility is not inferred from architecture or SDK.
 
-The stable application has no third-party Swift dependencies:
+For a complete development app bundle, use the documented onboarding commands from a clean checkout:
+
+    make doctor
+    make app
+    open build/Memoria.app
+    make test
+
+`make app` uses the SDK-explicit route, assembles resources and nested executables, and verifies executable permissions, architecture, dependencies and ad-hoc signatures. `make test` runs both the direct and Store/lifecycle suites. Python 3.9 or later is required; `PYTHON` selects its executable. Neither command registers a helper or login item.
+
+The ordinary application has no third-party Swift dependencies. Swift Package Manager is also available:
 
     swift build
     swift test
@@ -55,3 +64,9 @@ The fallback writes build/direct. MEMORIA_BUILD_FROM can resume a module after a
 The Git repository contains source, artwork, pinned worker dependencies and sanitised verification summaries. Build products, runtime captures and raw diagnostic logs are excluded. Build locally from a clean checkout; the commit identifies the published source snapshot. `python3 Scripts/package-source.py` archives the committed tree only.
 
 The SDK-explicit fallback compiles each module with one compiler frontend to avoid repeated framework imports. `MEMORIA_MODULE_CACHE` selects a reusable cache for the build and test scripts. This changes compilation scheduling, not application sandbox settings.
+
+## Reproducible preview packaging
+
+Commit the reviewed source, then run `make app preview-package` from a clean checkout. Use `MEMORIA_CONFIGURATION=Release` for an optimised preview. Build provenance records the commit and a fingerprint of compiler/bundle inputs; failed builds invalidate the manifest, and resumed builds cannot be packaged for publication. The packager rejects dirty, stale and partial builds.
+
+The resulting ZIP includes the application, Finder installation instructions and a manifest. Extraction is checked for executable permissions, ARM64 binaries, local dependencies, resources and signature integrity. This does not establish GUI, Gatekeeper, login-cycle or installation acceptance. See the [preview distribution workflow](Distribution.md#experimental-github-preview).
