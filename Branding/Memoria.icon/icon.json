@@ -1,0 +1,38 @@
+{
+  "fill": {
+    "automatic-gradient": "extended-srgb:0.92549,0.95294,1.00000,1.00000"
+  },
+  "fill-specializations": [
+    {
+      "appearance": "dark",
+      "value": {"solid": "extended-srgb:0.06275,0.09020,0.17255,1.00000"}
+    },
+    {
+      "appearance": "tinted",
+      "value": {"solid": "gray:0.18000,1.00000"}
+    }
+  ],
+  "groups": [
+    {
+      "name": "Brain",
+      "layers": [
+        {
+          "name": "01 Memoria brain",
+          "image-name": "Brain.png",
+          "fill": {"automatic-gradient": "extended-srgb:0.21176,0.35686,0.90980,1.00000"},
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {"automatic-gradient": "extended-srgb:0.53725,0.72157,1.00000,1.00000"}
+            },
+            {
+              "appearance": "tinted",
+              "value": {"solid": "gray:0.95000,1.00000"}
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "supported-platforms": {"squares": ["macOS"]}
+}

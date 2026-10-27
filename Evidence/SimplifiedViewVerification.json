@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27",
+  "mainWindowTabs": 12,
+  "controls": [
+    "Main toolbar: Simple / Full",
+    "Settings: General / Simplified main window"
+  ],
+  "default": "Full; last chosen mode is persisted",
+  "summary": [
+    "Contextual charts",
+    "CPU and accounted-memory readings",
+    "Up to ten measured processes ranked by the selected resource"
+  ],
+  "chartSources": [
+    "Existing bounded native CPU/memory/interface/driver history",
+    "Current optional experimental GPU/power measurements",
+    "Latest explicit socket scan",
+    "Provider capability statuses"
+  ],
+  "rankingPolicy": "Highest values first, stable identity ties; skip missing/invalid values, retain measured zero; application scope only on Applications",
+  "state": "Summary ranking preferences are separate from full-table filters and columns; selecting a row opens Full view and its inspector",
+  "builds": "Clean Debug and optimised SDK-explicit builds passed with Swift 6 strict concurrency and warnings as errors",
+  "tests": {
+    "swiftTestsPerConfiguration": 55,
+    "suites": 11,
+    "newTopTenTests": 5,
+    "uiSourceTypeCheck": "passed",
+    "uiExecution": "blocked by previously recorded GUI/Xcode launch problems"
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "exports" : [
+    {
+      "appearance" : "Default",
+      "path" : "Branding\/Exports\/PNG\/Default\/Memoria-16.png",
+      "pixels" : 16,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Default",
+      "path" : "Branding\/Exports\/PNG\/Default\/Memoria-32.png",
+      "pixels" : 32,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Default",
+      "path" : "Branding\/Exports\/PNG\/Default\/Memoria-64.png",
+      "pixels" : 64,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Default",
+      "path" : "Branding\/Exports\/PNG\/Default\/Memoria-128.png",
+      "pixels" : 128,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Default",
+      "path" : "Branding\/Exports\/PNG\/Default\/Memoria-256.png",
+      "pixels" : 256,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Default",
+      "path" : "Branding\/Exports\/PNG\/Default\/Memoria-512.png",
+      "pixels" : 512,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Default",
+      "path" : "Branding\/Exports\/PNG\/Default\/Memoria-1024.png",
+      "pixels" : 1024,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Dark",
+      "path" : "Branding\/Exports\/PNG\/Dark\/Memoria-16.png",
+      "pixels" : 16,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Dark",
+      "path" : "Branding\/Exports\/PNG\/Dark\/Memoria-32.png",
+      "pixels" : 32,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Dark",
+      "path" : "Branding\/Exports\/PNG\/Dark\/Memoria-64.png",
+      "pixels" : 64,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Dark",
+      "path" : "Branding\/Exports\/PNG\/Dark\/Memoria-128.png",
+      "pixels" : 128,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Dark",
+      "path" : "Branding\/Exports\/PNG\/Dark\/Memoria-256.png",
+      "pixels" : 256,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Dark",
+      "path" : "Branding\/Exports\/PNG\/Dark\/Memoria-512.png",
+      "pixels" : 512,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Dark",
+      "path" : "Branding\/Exports\/PNG\/Dark\/Memoria-1024.png",
+      "pixels" : 1024,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Mono",
+      "path" : "Branding\/Exports\/PNG\/Mono\/Memoria-16.png",
+      "pixels" : 16,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Mono",
+      "path" : "Branding\/Exports\/PNG\/Mono\/Memoria-32.png",
+      "pixels" : 32,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Mono",
+      "path" : "Branding\/Exports\/PNG\/Mono\/Memoria-64.png",
+      "pixels" : 64,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Mono",
+      "path" : "Branding\/Exports\/PNG\/Mono\/Memoria-128.png",
+      "pixels" : 128,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Mono",
+      "path" : "Branding\/Exports\/PNG\/Mono\/Memoria-256.png",
+      "pixels" : 256,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Mono",
+      "path" : "Branding\/Exports\/PNG\/Mono\/Memoria-512.png",
+      "pixels" : 512,
+      "role" : "Flattened fallback; not Icon Composer input"
+    },
+    {
+      "appearance" : "Mono",
+      "path" : "Branding\/Exports\/PNG\/Mono\/Memoria-1024.png",
+      "pixels" : 1024,
+      "role" : "Flattened fallback; not Icon Composer input"
+    }
+  ],
+  "menuBarPoints" : 18,
+  "menuBarScales" : [
+    1,
+    2
+  ],
+  "nativeRenderingVerified" : false,
+  "nativeSource" : "Branding\/Memoria.icon",
+  "schema" : 1
+}

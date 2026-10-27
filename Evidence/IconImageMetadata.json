@@ -1,0 +1,606 @@
+{
+  "checked": 60,
+  "images": [
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 255,
+      "path": "Branding/Exports/Dark-1024-Unmasked.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 1048576,
+      "width": 1024
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 255,
+      "path": "Branding/Exports/Default-1024-Unmasked.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 1048576,
+      "width": 1024
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Logo-Cobalt-1024.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 336722,
+      "width": 1024
+    },
+    {
+      "height": 128,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_128x128.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 12076,
+      "width": 128
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_128x128@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 16,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_16x16.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 196,
+      "width": 16
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_16x16@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_256x256.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_256x256@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_32x32.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 64,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_32x32@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 3044,
+      "width": 64
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_512x512.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Dark.iconset/icon_512x512@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 767120,
+      "width": 1024
+    },
+    {
+      "height": 128,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_128x128.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 12076,
+      "width": 128
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_128x128@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 16,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_16x16.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 196,
+      "width": 16
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_16x16@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_256x256.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_256x256@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_32x32.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 64,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_32x32@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 3044,
+      "width": 64
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_512x512.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Default.iconset/icon_512x512@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 767120,
+      "width": 1024
+    },
+    {
+      "height": 128,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_128x128.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 12076,
+      "width": 128
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_128x128@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 16,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_16x16.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 196,
+      "width": 16
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_16x16@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_256x256.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_256x256@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_32x32.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 64,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_32x32@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 3044,
+      "width": 64
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_512x512.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/Memoria-Mono.iconset/icon_512x512@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 767120,
+      "width": 1024
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/MenuBar/BrainMark.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": true,
+      "visiblePixels": 564,
+      "width": 32
+    },
+    {
+      "height": 64,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/MenuBar/BrainMark@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": true,
+      "visiblePixels": 2212,
+      "width": 64
+    },
+    {
+      "height": 18,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/MenuBar/BrainTemplate.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": true,
+      "visiblePixels": 202,
+      "width": 18
+    },
+    {
+      "height": 36,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/MenuBar/BrainTemplate@2x.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": true,
+      "visiblePixels": 763,
+      "width": 36
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 255,
+      "path": "Branding/Exports/Mono-1024-Unmasked.png",
+      "profile": "Generic Gray Gamma 2.2 Profile",
+      "templateBlackRGB": false,
+      "visiblePixels": 1048576,
+      "width": 1024
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Dark/Memoria-1024.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 767120,
+      "width": 1024
+    },
+    {
+      "height": 128,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Dark/Memoria-128.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 12076,
+      "width": 128
+    },
+    {
+      "height": 16,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Dark/Memoria-16.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 196,
+      "width": 16
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Dark/Memoria-256.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Dark/Memoria-32.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Dark/Memoria-512.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 64,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Dark/Memoria-64.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 3044,
+      "width": 64
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Default/Memoria-1024.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 767120,
+      "width": 1024
+    },
+    {
+      "height": 128,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Default/Memoria-128.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 12076,
+      "width": 128
+    },
+    {
+      "height": 16,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Default/Memoria-16.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 196,
+      "width": 16
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Default/Memoria-256.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Default/Memoria-32.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Default/Memoria-512.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 64,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Default/Memoria-64.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 3044,
+      "width": 64
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Mono/Memoria-1024.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 767120,
+      "width": 1024
+    },
+    {
+      "height": 128,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Mono/Memoria-128.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 12076,
+      "width": 128
+    },
+    {
+      "height": 16,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Mono/Memoria-16.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 196,
+      "width": 16
+    },
+    {
+      "height": 256,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Mono/Memoria-256.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 48104,
+      "width": 256
+    },
+    {
+      "height": 32,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Mono/Memoria-32.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 764,
+      "width": 32
+    },
+    {
+      "height": 512,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Mono/Memoria-512.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 191988,
+      "width": 512
+    },
+    {
+      "height": 64,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Exports/PNG/Mono/Memoria-64.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 3044,
+      "width": 64
+    },
+    {
+      "height": 1024,
+      "maxAlpha": 255,
+      "minAlpha": 0,
+      "path": "Branding/Memoria.icon/Assets/Brain.png",
+      "profile": "sRGB IEC61966-2.1",
+      "templateBlackRGB": false,
+      "visiblePixels": 336722,
+      "width": 1024
+    }
+  ],
+  "pngChecks": "passed"
+}

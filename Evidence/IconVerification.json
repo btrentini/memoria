@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-27",
+  "generation": "Built-in image_gen; selected originals and full prompts retained under Branding/Source",
+  "design": "Original paired-hemisphere brain; cobalt/porcelain default and brighter blue/midnight dark",
+  "appearances": [
+    "Default/light bitmap",
+    "Dark bitmap",
+    "Monochrome bitmap",
+    "Native default/dark/mono annotations; renderer verification pending"
+  ],
+  "bitmapPixels": [
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "iconsetPointSizes": [
+    16,
+    32,
+    128,
+    256,
+    512
+  ],
+  "iconsetScales": [
+    1,
+    2
+  ],
+  "nativeCanvasPixels": 1024,
+  "nativeForeground": "Unmasked transparent PNG in sRGB; no enclosure or baked lighting",
+  "menuBar": {
+    "points": 18,
+    "pixels": [
+      18,
+      36
+    ],
+    "type": "black alpha template; SwiftUI renderingMode(template)"
+  },
+  "largerTemplate": {
+    "points": 32,
+    "pixels": [
+      32,
+      64
+    ]
+  },
+  "pngMetadata": {
+    "checked": 60,
+    "status": "passed",
+    "evidence": "Evidence/IconImageMetadata.json"
+  },
+  "icns": {
+    "encoder": "Apple ImageIO",
+    "files": 3,
+    "decodedRepresentationsPerFile": 10,
+    "sizeAndDensityRoundTrips": "passed"
+  },
+  "visualProof": {
+    "file": "Branding/Preview.png",
+    "reviewed": "Default, dark, mono; 16/32/64/128 at native pixels; black/white menu template",
+    "kind": "artwork proof, not live OS screenshot"
+  },
+  "builds": {
+    "Debug": "clean SDK-explicit Swift 6 build passed",
+    "Release": "clean optimised SDK-explicit Swift 6 build passed",
+    "warningsAsErrors": true
+  },
+  "resourceIntegration": {
+    "xcodeReferences": "passed static validation",
+    "swiftPackage": "app resources declared; normal SPM launcher remains gated by existing Xcode installation",
+    "bundleIcon": "CFBundleIconFile and default ICNS match",
+    "appAndWidgetTemplates": "copied bytes match",
+    "signatures": "both bundles passed strict ad-hoc verification"
+  },
+  "nativeComposer": "Blocked before document decoding: FileWrapper NSCocoaError 256, underlying LaunchServices -10813, also reproduced on Apple Xcode template. Asset compiler has existing IDE initialisation failure.",
+  "liveAcceptance": "Not verified: native document render, Dock/Finder, selected dark/tinted/clear appearances, live menu bar/widget appearance.",
+  "existingTests": "55 core/service tests passed in preceding widget verification; not rerun for artwork and resource-only changes.",
+  "sources": [
+    "https://developer.apple.com/design/human-interface-guidelines/app-icons",
+    "https://developer.apple.com/icon-composer/",
+    "https://developer.apple.com/documentation/xcode/creating-your-app-icon-using-icon-composer",
+    "https://developer.apple.com/library/archive/documentation/General/Conceptual/MOSXAppProgrammingGuide/CommonAppBehaviors/CommonAppBehaviors.html"
+  ]
+}

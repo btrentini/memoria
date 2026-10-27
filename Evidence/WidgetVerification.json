@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-27",
+  "menuBar": {
+    "readings": [
+      "CPU and memory",
+      "CPU",
+      "Memory",
+      "Icon only"
+    ],
+    "default": "CPU and memory",
+    "controls": "Settings / General",
+    "popover": "CPU and memory, CPU history, pressure and thermal state, main/Simple/Quick windows",
+    "runtime": "unverified: existing GUI registration failure"
+  },
+  "widget": {
+    "target": "MemoriaWidget",
+    "identifier": "fyi.trentini.memoria.widget",
+    "families": [
+      "systemSmall",
+      "systemMedium"
+    ],
+    "embedded": true,
+    "sandboxEntitlement": true,
+    "localDependencies": [
+      "MemoriaWidgetSupport"
+    ],
+    "runtime": "unverified: signed App Group configuration and GUI acceptance required"
+  },
+  "sharedSnapshot": {
+    "schema": 1,
+    "maxBytes": 32768,
+    "maxHistoryPoints": 30,
+    "routineWriteIntervalSeconds": 30,
+    "routineReloadRequestIntervalSeconds": 900,
+    "staleAfterSeconds": 300,
+    "refreshGuarantee": false,
+    "privacy": "aggregate numerical readings and timing only; no process metadata",
+    "disabled": "fixed cache removed and reload requested; rendered content may persist"
+  },
+  "builds": {
+    "Debug": "clean SDK-explicit build passed",
+    "Release": "clean SDK-explicit optimised build passed",
+    "language": 6,
+    "architecture": "arm64",
+    "strictConcurrency": true,
+    "warningsAsErrors": true,
+    "applicationExtensionAPIRestriction": true,
+    "finalCompilerDiagnostics": [],
+    "earlierDiagnostic": "An earlier successful extension compile emitted sandbox_apply Operation not permitted; origin not isolated. Retained in Evidence/README.md (local log withheld); absent in both clean final compiler runs."
+  },
+  "policyTests": {
+    "addedFunctions": 9,
+    "totalPerConfiguration": 55,
+    "suites": 11,
+    "Debug": "passed",
+    "optimisedLibraries": "passed",
+    "covers": [
+      "aggregate privacy keys",
+      "nil versus zero",
+      "schema/range/history/size rejection",
+      "freshness and clock changes",
+      "atomic replacement, permissions and deletion",
+      "symlink cache rejection",
+      "write and reload cadence",
+      "group identifier and navigation-only URL policy",
+      "menu label formatting"
+    ]
+  },
+  "packaging": {
+    "appStrictAdHocSignature": "passed",
+    "widgetStrictAdHocSignature": "passed",
+    "developmentAppGroup": "unconfigured by design",
+    "projectAndEntitlementStaticChecks": "passed",
+    "extensionLinkage": "Evidence/README.md (local log withheld)"
+  },
+  "blockedAcceptance": [
+    "Live menu-bar appearance and window lifecycle",
+    "Widget gallery, both sizes and visual/accessibility acceptance",
+    "Signed App Group delivery and revocation",
+    "Closed-window navigation, sleep/wake and OS refresh timing"
+  ],
+  "guidance": "Documentation/Widgets.md"
+}

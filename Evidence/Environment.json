@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-27",
+  "os": "macOS 26.7.1",
+  "osBuild": "25G241",
+  "xcode": "27.1",
+  "xcodeBuild": "27A9275",
+  "sdk": "27.0",
+  "swift": "6.4",
+  "languageMode": 6,
+  "architecture": "arm64",
+  "deploymentTarget": "26.0",
+  "observedCores": 12,
+  "observedMemoryBytes": 34359738368,
+  "chipIdentity": "Unavailable: hardware sysctl denied",
+  "validSigningIdentities": 0,
+  "bootIdentity": "UUID and public boot-time sysctl denied (EPERM)",
+  "xcodeBuildBlock": "Missing /Library/Developer/PrivateFrameworks/CoreSimulator.framework; first-launch installation request failed"
+}

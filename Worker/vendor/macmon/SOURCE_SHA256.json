@@ -1,0 +1,8 @@
+{
+  "src/clpc.rs": "9ba6068e30f26375a97731aca9e805a2c53cd0f471dfed7c0bd97d403cebb03d",
+  "src/diagnostics.rs": "5de40a5fcfede9c4ddd379c9f6696d1e3fe1e604928e673b2e89495765e9ec4e",
+  "src/lib.rs": "926c2812d52a0e85f68d5db3d4adf077e6abca1eb4786fe72599b6854221fe4a",
+  "src/metrics.rs": "e675449da7967b6bf5544c656b61d3b258dab6df655d0606f6cd83b0eaa15c2c",
+  "src/shared.rs": "ef526e7a51afb90db177efa66f093bf788ff7062c3283308f42c3dc5e1c918ef",
+  "src/sources.rs": "215b62ffcad15b8f185c79fcc025e7effb533d77ffb3143d8dba7716c41546ee"
+}

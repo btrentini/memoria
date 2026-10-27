@@ -1,0 +1,1607 @@
+{
+  "schema": 1,
+  "source": "User-supplied implementation plan",
+  "numberedBriefAvailable": false,
+  "requirements": [
+    {
+      "id": "P0.01",
+      "phase": 0,
+      "requirement": "Record OS, SDK, compiler and architecture",
+      "implementation": "Evidence/Environment.json",
+      "tier": 1,
+      "tests": "Tool version queries",
+      "evidence": "Observed Xcode 27.1, SDK 27.0, Swift 6.4, macOS 26.7.1, ARM64",
+      "status": "Verified"
+    },
+    {
+      "id": "P0.02",
+      "phase": 0,
+      "requirement": "Independently establish M2 Pro hardware",
+      "implementation": "Evidence/Environment.json",
+      "tier": 1,
+      "tests": "Hardware query",
+      "evidence": "Hardware model query denied; logical cores and RAM do not identify a chip",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P0.03",
+      "phase": 0,
+      "requirement": "Writable access to retained memoria repository",
+      "implementation": "Documentation/Build.md",
+      "tier": 1,
+      "tests": "Write check",
+      "evidence": "Renamed repository outside current writable roots; staging used",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P0.04",
+      "phase": 0,
+      "requirement": "Inspect six upstream repositories at immutable commits",
+      "implementation": "Documentation/DependencyAudit.md",
+      "tier": 1,
+      "tests": "Source and manifest review",
+      "evidence": "Commit/file inventory recorded; audit limits explicit",
+      "status": "Implemented"
+    },
+    {
+      "id": "P0.05",
+      "phase": 0,
+      "requirement": "Record licences and integration decisions",
+      "implementation": "Documentation/DependencyAudit.md",
+      "tier": 1,
+      "tests": "Licence review",
+      "evidence": "No GPL code incorporated",
+      "status": "Implemented"
+    },
+    {
+      "id": "P0.06",
+      "phase": 0,
+      "requirement": "Audit adopted transitive dependencies and build scripts",
+      "implementation": "Documentation/DependencyAudit.md",
+      "tier": 1,
+      "tests": "Pinned worker dependency review",
+      "evidence": "Vendored source/build-script review and offline locked build complete; see dependency audit limits",
+      "status": "Implemented"
+    },
+    {
+      "id": "P0.07",
+      "phase": 0,
+      "requirement": "Generate SPDX inventory and attribution",
+      "implementation": "Documentation/SBOM.spdx.json",
+      "tier": 1,
+      "tests": "JSON and inventory checks",
+      "evidence": "Documentation/SBOM.spdx.json generated from resolved lock; ThirdPartyNotices/NOTICE.md; cross-reference validation and 1,024 vendor digests.",
+      "status": "Verified"
+    },
+    {
+      "id": "P0.08",
+      "phase": 0,
+      "requirement": "Scan dependencies for advisories",
+      "implementation": "Documentation/DependencyAudit.md",
+      "tier": 1,
+      "tests": "OSV query batch",
+      "evidence": "Evidence/osv-query.json and osv-response.json: no OSV matches for fourteen exact registry versions; Git/private-API coverage excluded.",
+      "status": "Verified"
+    },
+    {
+      "id": "P0.09",
+      "phase": 0,
+      "requirement": "Document capability/provider matrix",
+      "implementation": "Documentation/Capabilities.md",
+      "tier": 1,
+      "tests": "Source/API mapping",
+      "evidence": "Measurement and fallback distinguished",
+      "status": "Implemented"
+    },
+    {
+      "id": "P0.10",
+      "phase": 0,
+      "requirement": "Document architecture and privilege threat model",
+      "implementation": "Documentation/Architecture.md; Documentation/ThreatModel.md",
+      "tier": 1,
+      "tests": "Design review",
+      "evidence": "Residual signalling race documented",
+      "status": "Implemented"
+    },
+    {
+      "id": "P0.11",
+      "phase": 0,
+      "requirement": "Inspect SDK process, resource and socket declarations",
+      "implementation": "Sources/MemoriaNative",
+      "tier": 1,
+      "tests": "Strict C compilation",
+      "evidence": "C bridge compiled with -Wall -Wextra -Werror",
+      "status": "Verified"
+    },
+    {
+      "id": "P0.12",
+      "phase": 0,
+      "requirement": "Establish commands, evidence and granular ledger",
+      "implementation": "Documentation/Build.md; Documentation/Requirements.md",
+      "tier": 1,
+      "tests": "Project/ledger validation",
+      "evidence": "Ledger does not equate compile with runtime",
+      "status": "Implemented"
+    },
+    {
+      "id": "P0.13",
+      "phase": 0,
+      "requirement": "MIT licence for original code",
+      "implementation": "LICENSE",
+      "tier": 1,
+      "tests": "Licence inspection",
+      "evidence": "Original code licence present",
+      "status": "Verified"
+    },
+    {
+      "id": "P1.01",
+      "phase": 1,
+      "requirement": "Checked-in Xcode app target and shared schemes",
+      "implementation": "Memoria.xcodeproj",
+      "tier": 1,
+      "tests": "plutil and xcodebuild",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.02",
+      "phase": 1,
+      "requirement": "Separate helper and disposable-fixture targets",
+      "implementation": "Helper; Fixtures; Package.swift",
+      "tier": 1,
+      "tests": "Independent target builds",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.03",
+      "phase": 1,
+      "requirement": "Local package modules with Swift 6 concurrency checking",
+      "implementation": "Package.swift; Sources",
+      "tier": 1,
+      "tests": "Debug/Release warnings-as-errors build",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.04",
+      "phase": 1,
+      "requirement": "Native sidebar, content and inspector regions",
+      "implementation": "App/Views.swift",
+      "tier": 1,
+      "tests": "XCUITest and interactive resize",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.05",
+      "phase": 1,
+      "requirement": "All twelve navigation destinations",
+      "implementation": "App/AppModel.swift; App/Views.swift",
+      "tier": 1,
+      "tests": "Navigation smoke",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.06",
+      "phase": 1,
+      "requirement": "Native typography and semantic light/dark appearance",
+      "implementation": "App/Views.swift; App/SettingsView.swift",
+      "tier": 1,
+      "tests": "Appearance/accessibility inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.07",
+      "phase": 1,
+      "requirement": "Menu-bar entry and popover",
+      "implementation": "App/MemoriaApp.swift; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Menu lifecycle smoke",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.08",
+      "phase": 1,
+      "requirement": "Reusable Quick Task Manager window",
+      "implementation": "App/AppModel.swift; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Warm presentation and repeated open/close",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.09",
+      "phase": 1,
+      "requirement": "Configurable Control\u2013Shift shortcut and conflict status",
+      "implementation": "App/GlobalShortcut.swift",
+      "tier": 1,
+      "tests": "Conflict/disable/key-change checks",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.10",
+      "phase": 1,
+      "requirement": "Preserve system Force Quit shortcut",
+      "implementation": "App/GlobalShortcut.swift",
+      "tier": 1,
+      "tests": "Registered modifier/key inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.11",
+      "phase": 1,
+      "requirement": "Persist column dimensions, visibility and quick-window frame",
+      "implementation": "App/ProcessViews.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Relaunch preferences test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.12",
+      "phase": 1,
+      "requirement": "Confine synthetic data to tests/fixtures",
+      "implementation": "Tests; Fixtures",
+      "tier": 1,
+      "tests": "Production source inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P1.13",
+      "phase": 1,
+      "requirement": "Launch, keyboard focus and window smoke",
+      "implementation": "UITests",
+      "tier": 1,
+      "tests": "Interactive app test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.01",
+      "phase": 2,
+      "requirement": "Enumerate processes with PID/start/boot identity",
+      "implementation": "Sources/MemoriaNative/native.c; NativeReader.swift",
+      "tier": 1,
+      "tests": "Native probe and identity tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.02",
+      "phase": 2,
+      "requirement": "Collect owner, ancestry, path, state, threads and start time",
+      "implementation": "Sources/MemoriaCollectors/NativeReader.swift",
+      "tier": 1,
+      "tests": "Disposable-process inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.03",
+      "phase": 2,
+      "requirement": "Collect CPU time, RSS and physical footprint",
+      "implementation": "Sources/MemoriaNative/native.c",
+      "tier": 1,
+      "tests": "Controlled CPU/memory workloads",
+      "evidence": "Evidence/README.md (local log withheld); Evidence/README.md (local log withheld). One/two-thread CPU and footprint checks; no independent chip-model claim.",
+      "status": "Verified"
+    },
+    {
+      "id": "P2.04",
+      "phase": 2,
+      "requirement": "Preserve task/resource/path errors per process",
+      "implementation": "Sources/MemoriaCollectors/NativeReader.swift",
+      "tier": 1,
+      "tests": "Denied/fast-exit tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.05",
+      "phase": 2,
+      "requirement": "Collect process I/O accounting where exposed",
+      "implementation": "Sources/MemoriaNative/native.c; TelemetryCoordinator.swift",
+      "tier": 1,
+      "tests": "Counter/rate tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.06",
+      "phase": 2,
+      "requirement": "Lazy arguments without routine recording",
+      "implementation": "Sources/MemoriaCollectors/NativeReader.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Argument privacy/revalidation test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.07",
+      "phase": 2,
+      "requirement": "Invalidate process deltas when executable changes",
+      "implementation": "Sources/MemoriaCollectors/TelemetryCoordinator.swift",
+      "tier": 1,
+      "tests": "Exec identity tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.08",
+      "phase": 2,
+      "requirement": "Collect host/per-core user/system/idle deltas",
+      "implementation": "Sources/MemoriaNative/native.c; MemoriaCore/Metrics.swift",
+      "tier": 1,
+      "tests": "Accounting and native probe",
+      "evidence": "Evidence/README.md (local log withheld) and native-tests.txt: 12 host CPU counters sampled; Evidence/README.md (local log withheld) tests delta arithmetic and reset handling. GUI and independent host-load comparison remain open.",
+      "status": "Verified"
+    },
+    {
+      "id": "P2.09",
+      "phase": 2,
+      "requirement": "Discover core count and avoid unverified P/E labels",
+      "implementation": "App/Views.swift; SystemCollector.swift",
+      "tier": 1,
+      "tests": "Core-count inspection",
+      "evidence": "Evidence/README.md (local log withheld): 12 cores reported. Presentation source uses core indices without inferred P/E assignments; chip identity remains unavailable.",
+      "status": "Verified"
+    },
+    {
+      "id": "P2.10",
+      "phase": 2,
+      "requirement": "Collect one/five/fifteen-minute load averages",
+      "implementation": "Sources/MemoriaCollectors/SystemCollector.swift",
+      "tier": 1,
+      "tests": "Native probe",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.11",
+      "phase": 2,
+      "requirement": "One-core process percentages and labelled machine-normalisation",
+      "implementation": "MemoriaCore/Metrics.swift; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "200% CPU arithmetic test",
+      "evidence": "Evidence/README.md (local log withheld); Evidence/README.md (local log withheld). One/two-thread CPU and footprint checks; no independent chip-model claim.",
+      "status": "Verified"
+    },
+    {
+      "id": "P2.12",
+      "phase": 2,
+      "requirement": "Memory components and documented accounting formulas",
+      "implementation": "SystemCollector.swift; Documentation/Architecture.md",
+      "tier": 1,
+      "tests": "Accounting review/native probe",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.13",
+      "phase": 2,
+      "requirement": "Swap, cumulative page activity and pressure notifications",
+      "implementation": "SystemCollector.swift; TelemetryCoordinator.swift",
+      "tier": 1,
+      "tests": "Pressure/workload checks",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.14",
+      "phase": 2,
+      "requirement": "Keep available memory distinct from free memory",
+      "implementation": "App/Views.swift; Documentation/Architecture.md",
+      "tier": 1,
+      "tests": "Copy/formula review",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.15",
+      "phase": 2,
+      "requirement": "Group exact bundle paths and inferred ancestry",
+      "implementation": "MemoriaCore/Processes.swift; App/Views.swift",
+      "tier": 1,
+      "tests": "Grouping tests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P2.16",
+      "phase": 2,
+      "requirement": "Keep shared/unassigned services separate",
+      "implementation": "MemoriaCore/Processes.swift",
+      "tier": 1,
+      "tests": "Shared-service fixture",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P2.17",
+      "phase": 2,
+      "requirement": "Label application footprints as accounting sums",
+      "implementation": "App/Views.swift",
+      "tier": 1,
+      "tests": "Copy review",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.18",
+      "phase": 2,
+      "requirement": "Sortable virtualised table and basic filters",
+      "implementation": "App/ProcessViews.swift; MemoriaCore/Processes.swift",
+      "tier": 1,
+      "tests": "5,000-row benchmark",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.19",
+      "phase": 2,
+      "requirement": "Inspector with copy/reveal/actions and resource details",
+      "implementation": "App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Selection/fast-exit smoke",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.20",
+      "phase": 2,
+      "requirement": "Bound history and incremental sampling publication",
+      "implementation": "History.swift; TelemetryCoordinator.swift",
+      "tier": 1,
+      "tests": "Bounds/stream capacity checks",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.21",
+      "phase": 2,
+      "requirement": "Run system calls away from MainActor on bounded executors",
+      "implementation": "Sources/MemoriaCollectors/NativeReader.swift",
+      "tier": 1,
+      "tests": "Concurrency review/profile",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.22",
+      "phase": 2,
+      "requirement": "Lazy signing metadata and open-file inspection",
+      "implementation": "Sources/MemoriaServices/ProcessDetails.swift",
+      "tier": 1,
+      "tests": "Identity-bound detail tests",
+      "evidence": "Bounded five-second cache with before/after revalidation",
+      "status": "Implemented"
+    },
+    {
+      "id": "P2.23",
+      "phase": 2,
+      "requirement": "Configurable collapsible process tree table",
+      "implementation": "App/ProcessOutline.swift",
+      "tier": 1,
+      "tests": "Tree navigation/large-table test",
+      "evidence": "Virtualised NSOutlineView; interactive verification outstanding",
+      "status": "Implemented"
+    },
+    {
+      "id": "P3.01",
+      "phase": 3,
+      "requirement": "Normal application quit remains distinct from signals",
+      "implementation": "Sources/MemoriaServices/ProcessActions.swift",
+      "tier": 1,
+      "tests": "Disposable app normal-quit test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P3.02",
+      "phase": 3,
+      "requirement": "SIGTERM and explicit confirmed SIGKILL",
+      "implementation": "Actions.swift; ProcessActions.swift; ActionConfirmation",
+      "tier": 1,
+      "tests": "Action tests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.03",
+      "phase": 3,
+      "requirement": "Revalidate start, boot and executable before every signal",
+      "implementation": "Sources/MemoriaServices/ProcessActions.swift",
+      "tier": 1,
+      "tests": "Stale/reused PID and exec tests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.04",
+      "phase": 3,
+      "requirement": "Reject invalid PIDs, PID 1 and own infrastructure",
+      "implementation": "Sources/MemoriaCore/Actions.swift",
+      "tier": 1,
+      "tests": "Invalid/excluded-target tests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.05",
+      "phase": 3,
+      "requirement": "Review fixed children-first tree membership",
+      "implementation": "Processes.swift; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Cycle/order/scope tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P3.06",
+      "phase": 3,
+      "requirement": "Exclude inferred/shared helpers initially",
+      "implementation": "App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Tree confirmation review",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P3.07",
+      "phase": 3,
+      "requirement": "Revalidate every selected tree target",
+      "implementation": "ProcessActions.swift",
+      "tier": 1,
+      "tests": "Partial tree failure test",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.08",
+      "phase": 3,
+      "requirement": "Report survivors without expanding termination scope",
+      "implementation": "App/AppModel.swift",
+      "tier": 1,
+      "tests": "Spawn/reparent fixture",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P3.09",
+      "phase": 3,
+      "requirement": "Never automatically escalate SIGTERM",
+      "implementation": "ProcessActions.swift",
+      "tier": 1,
+      "tests": "Ignored-TERM test",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.10",
+      "phase": 3,
+      "requirement": "Observe exit separately from signal delivery",
+      "implementation": "ProcessActions.swift",
+      "tier": 1,
+      "tests": "Still-running/exit/denial tests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.11",
+      "phase": 3,
+      "requirement": "Preserve errno without assuming SIP protection",
+      "implementation": "ProcessActions.swift; Documentation/ThreatModel.md",
+      "tier": 1,
+      "tests": "EPERM tests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.12",
+      "phase": 3,
+      "requirement": "Generate fixed numeric Terminal commands without execution",
+      "implementation": "Actions.swift; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Command construction test",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P3.13",
+      "phase": 3,
+      "requirement": "Explain copied-command and final TOCTOU limitations",
+      "implementation": "Documentation/ThreatModel.md; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Copy review",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.01",
+      "phase": 4,
+      "requirement": "Validate port formats/ranges including bracketed IPv6 and URLs",
+      "implementation": "Sources/MemoriaCore/Ports.swift",
+      "tier": 1,
+      "tests": "PortTests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P4.02",
+      "phase": 4,
+      "requirement": "Inspect libproc socket descriptors before fallback",
+      "implementation": "Sources/MemoriaCollectors/PortCollector.swift",
+      "tier": 1,
+      "tests": "IPv4/IPv6/UDP fixtures",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.03",
+      "phase": 4,
+      "requirement": "Bound lsof runtime, output and cancellation",
+      "implementation": "Sources/MemoriaServices/BoundedCommand.swift",
+      "tier": 1,
+      "tests": "Timeout/flood/parser tests",
+      "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates.",
+      "status": "Verified"
+    },
+    {
+      "id": "P4.04",
+      "phase": 4,
+      "requirement": "Distinguish wildcard/loopback binds and TCP client states",
+      "implementation": "Ports.swift; native.c",
+      "tier": 1,
+      "tests": "Established false-match tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.05",
+      "phase": 4,
+      "requirement": "Cache scans and avoid one-second full-system lsof",
+      "implementation": "PortCollector.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Scheduling inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.06",
+      "phase": 4,
+      "requirement": "Free Port confirms identity, terminates and re-scans",
+      "implementation": "ProcessActions.swift; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Listener removal and replacement tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.07",
+      "phase": 4,
+      "requirement": "Report incomplete coverage and replacement listeners",
+      "implementation": "Ports.swift; ProcessActions.swift",
+      "tier": 1,
+      "tests": "Permission/race tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.08",
+      "phase": 4,
+      "requirement": "Display physical/virtual/loopback/tunnel interface counters",
+      "implementation": "SystemCollector.swift; App/Views.swift",
+      "tier": 1,
+      "tests": "Counter/reset/churn/VPN tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.09",
+      "phase": 4,
+      "requirement": "Avoid duplicate aggregate interface totals",
+      "implementation": "App/Views.swift; Documentation/Architecture.md",
+      "tier": 1,
+      "tests": "Aggregation review",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.10",
+      "phase": 4,
+      "requirement": "Display mounted internal/external volume capacities",
+      "implementation": "SystemCollector.swift; App/Views.swift",
+      "tier": 1,
+      "tests": "Volume/APFS checks",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.11",
+      "phase": 4,
+      "requirement": "Do not sum shared APFS capacity",
+      "implementation": "App/Views.swift",
+      "tier": 1,
+      "tests": "Accounting review",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.12",
+      "phase": 4,
+      "requirement": "Port-aware search and inspector sockets",
+      "implementation": "App/AppModel.swift; App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Quick-window search test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P4.13",
+      "phase": 4,
+      "requirement": "Validated physical-device disk-activity provider",
+      "implementation": "Sources/MemoriaCollectors/DiskCollector.swift",
+      "tier": 1,
+      "tests": "Controlled physical-device I/O comparison",
+      "evidence": "Documented per-driver counters implemented; physical-device/reference comparison outstanding",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.01",
+      "phase": 5,
+      "requirement": "Pinned macmon library worker with app features disabled",
+      "implementation": "Worker/Cargo.toml; Worker/Cargo.lock",
+      "tier": 2,
+      "tests": "Locked ARM64 cargo build",
+      "evidence": "Evidence/README.md (local log withheld); Evidence/README.md (local log withheld): ARM64 --locked --offline build; no CLI/server dependency path.",
+      "status": "Verified"
+    },
+    {
+      "id": "P5.02",
+      "phase": 5,
+      "requirement": "Private APIs remain outside the GUI",
+      "implementation": "Worker; Package.swift",
+      "tier": 2,
+      "tests": "Link/symbol inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.03",
+      "phase": 5,
+      "requirement": "Verify exact bundled worker path and code signature",
+      "implementation": "ExperimentalProvider.swift",
+      "tier": 2,
+      "tests": "Wrong identity/missing worker tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.04",
+      "phase": 5,
+      "requirement": "Minimal environment and compatible handshake",
+      "implementation": "ExperimentalProvider.swift; WorkerProtocol.swift",
+      "tier": 2,
+      "tests": "Protocol version tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.05",
+      "phase": 5,
+      "requirement": "Bound stdout/stderr, message size, rate and buffering",
+      "implementation": "ExperimentalProvider.swift; WorkerProtocol.swift",
+      "tier": 2,
+      "tests": "Flood/oversize tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.06",
+      "phase": 5,
+      "requirement": "Startup/read deadlines and limited restart backoff",
+      "implementation": "ExperimentalProvider.swift",
+      "tier": 2,
+      "tests": "Timeout/restart exhaustion tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.07",
+      "phase": 5,
+      "requirement": "Stop on disable, parent exit and worker failure",
+      "implementation": "ExperimentalProvider.swift; Worker/src/main.rs",
+      "tier": 2,
+      "tests": "Lifecycle/crash tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.08",
+      "phase": 5,
+      "requirement": "Discover channels before interpreting zero",
+      "implementation": "Worker/src/main.rs; WorkerProtocol.swift",
+      "tier": 2,
+      "tests": "Missing-counter tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.09",
+      "phase": 5,
+      "requirement": "Validate finite/range/unit/time and hardware/OS compatibility",
+      "implementation": "Worker/src/main.rs; WorkerProtocol.swift",
+      "tier": 2,
+      "tests": "Range/protocol tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.10",
+      "phase": 5,
+      "requirement": "GPU active residency separately from scaled activity",
+      "implementation": "Worker/src/main.rs; App/Views.swift",
+      "tier": 2,
+      "tests": "Matched Metal workload/reference",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.11",
+      "phase": 5,
+      "requirement": "CPU/GPU/DRAM/ANE power only with available channels",
+      "implementation": "Worker/src/main.rs",
+      "tier": 2,
+      "tests": "Idle/CPU/ANE comparison",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.12",
+      "phase": 5,
+      "requirement": "Temperature/fan values remain optional and bounded",
+      "implementation": "Worker/src/main.rs",
+      "tier": 2,
+      "tests": "Missing-sensor tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.13",
+      "phase": 5,
+      "requirement": "Do not invent ANE utilisation or dedicated VRAM",
+      "implementation": "App/Views.swift",
+      "tier": 2,
+      "tests": "Metric semantics review",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.14",
+      "phase": 5,
+      "requirement": "Per-metric provider, tier, quality and diagnostics",
+      "implementation": "Metrics.swift; WorkerProtocol.swift",
+      "tier": 2,
+      "tests": "Provenance round trip",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.15",
+      "phase": 5,
+      "requirement": "Stable UI survives optional-provider absence",
+      "implementation": "App/Views.swift; SettingsView.swift",
+      "tier": 2,
+      "tests": "Missing worker smoke",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P5.16",
+      "phase": 5,
+      "requirement": "Independent-reference disagreement reporting",
+      "implementation": "App/Views.swift; Documentation/Capabilities.md",
+      "tier": 2,
+      "tests": "Matched metric/provider comparison",
+      "evidence": "No validated independent reference; comparison remains explicitly unverified",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P5.17",
+      "phase": 5,
+      "requirement": "Independent M2 Pro idle/CPU/Metal validation",
+      "implementation": "Fixtures/MetalWorkload.swift",
+      "tier": 2,
+      "tests": "Matched reference measurement",
+      "evidence": "Hardware identity and independent measurements not established",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P5.18",
+      "phase": 5,
+      "requirement": "Per-process GPU/network attribution feasibility",
+      "implementation": "Documentation/Capabilities.md",
+      "tier": 2,
+      "tests": "Defensible attribution source",
+      "evidence": "No validated attribution source; shown unavailable",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P5.19",
+      "phase": 5,
+      "requirement": "Validated lock resolution and complete worker dependency audit",
+      "implementation": "Worker/Cargo.lock",
+      "tier": 2,
+      "tests": "cargo --locked and source/advisory audit",
+      "evidence": "Offline resolution/build, two Rust tests and 1,024 file digests verified; security audit coverage limited as documented",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.01",
+      "phase": 6,
+      "requirement": "Optional SMAppService bundled daemon, disabled by default",
+      "implementation": "Administrator.swift; Configuration",
+      "tier": 3,
+      "tests": "Signed registration-state tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.02",
+      "phase": 6,
+      "requirement": "Approval-pending/enabled/denied/unavailable/removal feedback",
+      "implementation": "Administrator.swift; App/SettingsView.swift",
+      "tier": 3,
+      "tests": "Service state lifecycle",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.03",
+      "phase": 6,
+      "requirement": "Demand-driven XPC and bounded helper lifetime",
+      "implementation": "Helper/main.swift; launchd plist",
+      "tier": 3,
+      "tests": "Idle/activation profile",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.04",
+      "phase": 6,
+      "requirement": "Exact identifier/team validation on both XPC ends",
+      "implementation": "AdministratorClient.swift; Helper/main.swift",
+      "tier": 3,
+      "tests": "Wrong signer/team tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.05",
+      "phase": 6,
+      "requirement": "Authenticate reply before sending authorisation form",
+      "implementation": "AdministratorClient.swift",
+      "tier": 3,
+      "tests": "Untrusted peer/handshake tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.06",
+      "phase": 6,
+      "requirement": "Independently authorise each one-target request",
+      "implementation": "Administrator.swift",
+      "tier": 3,
+      "tests": "Missing/expired/revoked authorisation",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.07",
+      "phase": 6,
+      "requirement": "Keep externalised authorisation transient and unlogged",
+      "implementation": "AdministratorClient.swift",
+      "tier": 3,
+      "tests": "Code/log inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.08",
+      "phase": 6,
+      "requirement": "Independently re-query target identity inside helper",
+      "implementation": "Administrator.swift; ProcessActions.swift",
+      "tier": 3,
+      "tests": "Helper stale-target tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.09",
+      "phase": 6,
+      "requirement": "Fixed SIGTERM/SIGKILL only; no arbitrary execution",
+      "implementation": "Administrator.swift; Actions.swift",
+      "tier": 3,
+      "tests": "Unsupported operation decode tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.10",
+      "phase": 6,
+      "requirement": "Age, replay, size and version checks",
+      "implementation": "Administrator.swift",
+      "tier": 3,
+      "tests": "Helper policy tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.11",
+      "phase": 6,
+      "requirement": "Fail closed when signing credentials absent",
+      "implementation": "Administrator.swift; Helper/main.swift",
+      "tier": 3,
+      "tests": "Unsigned refusal test",
+      "evidence": "Evidence/README.md (unsigned helper refused to listen, exit 78): helper refused to listen and exited 78 with no signing team configured. Signed peer-validation and installation remain unverified.",
+      "status": "Verified"
+    },
+    {
+      "id": "P6.12",
+      "phase": 6,
+      "requirement": "Unregister/remove helper from Settings",
+      "implementation": "Administrator.swift; App/SettingsView.swift",
+      "tier": 3,
+      "tests": "Signed removal test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P6.13",
+      "phase": 6,
+      "requirement": "Signed installation, cross-user actions and revocation",
+      "implementation": "Documentation/Distribution.md",
+      "tier": 3,
+      "tests": "Isolated signed-system tests",
+      "evidence": "Developer ID credentials and isolated account/system unavailable",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P6.14",
+      "phase": 6,
+      "requirement": "Fixed-purpose powermetrics only after validation",
+      "implementation": "\u2014",
+      "tier": 3,
+      "tests": "Schema/overhead/authorisation validation",
+      "evidence": "Not exposed. Privileged schema/overhead validation and signed operation review required before implementation.",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P6.15",
+      "phase": 6,
+      "requirement": "Full cancellation/upgrade/revocation audit semantics",
+      "implementation": "Administrator.swift; AdministratorClient.swift",
+      "tier": 3,
+      "tests": "Interrupted operations and upgrade tests",
+      "evidence": "Cancellation, bounded in-memory audit and protocol mismatch handling present; signed revocation/lifecycle verification blocked",
+      "status": "Implemented"
+    },
+    {
+      "id": "P7.01",
+      "phase": 7,
+      "requirement": "Event-provider value abstraction and replay reconciliation",
+      "implementation": "Sources/MemoriaCore/ProcessEventProvider.swift; Sources/MemoriaCore/Actions.swift",
+      "tier": 4,
+      "tests": "IdentityTests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P7.02",
+      "phase": 7,
+      "requirement": "Dropped-event gap triggers polling reconciliation",
+      "implementation": "Sources/MemoriaCore/Actions.swift",
+      "tier": 4,
+      "tests": "Event gap test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P7.03",
+      "phase": 7,
+      "requirement": "Separately signed notification-only system extension",
+      "implementation": "\u2014",
+      "tier": 4,
+      "tests": "Live fork/exec/exit events",
+      "evidence": "Conditional on Apple entitlement/provisioning",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P7.04",
+      "phase": 7,
+      "requirement": "Authenticated extension communication and bounded retention",
+      "implementation": "\u2014",
+      "tier": 4,
+      "tests": "Malformed/gap/event-retention tests",
+      "evidence": "Extension not instantiated without provisioning",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P7.05",
+      "phase": 7,
+      "requirement": "Activation, TCC, revocation and complete removal",
+      "implementation": "\u2014",
+      "tier": 4,
+      "tests": "Isolated system lifecycle",
+      "evidence": "Apple-approved provisioning unavailable",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P7.06",
+      "phase": 7,
+      "requirement": "Retain polling when ES absent",
+      "implementation": "TelemetryCoordinator.swift; App/Views.swift",
+      "tier": 4,
+      "tests": "Missing capability smoke",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P7.07",
+      "phase": 7,
+      "requirement": "Exclude GPL reference implementations from MIT code",
+      "implementation": "Documentation/DependencyAudit.md",
+      "tier": 4,
+      "tests": "Dependency/source inventory",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.01",
+      "phase": 8,
+      "requirement": "Complete real-provider or unavailable states on all screens",
+      "implementation": "App/Views.swift",
+      "tier": 1,
+      "tests": "Navigation/empty-state smoke",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.02",
+      "phase": 8,
+      "requirement": "Command palette and process context menus",
+      "implementation": "App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Keyboard/menu checks",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.03",
+      "phase": 8,
+      "requirement": "Copy/reveal controls and tooltips",
+      "implementation": "App/ProcessViews.swift",
+      "tier": 1,
+      "tests": "Inspection-action smoke",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.04",
+      "phase": 8,
+      "requirement": "60-second, 5-minute, 15-minute and one-hour history windows",
+      "implementation": "History.swift; App/Views.swift",
+      "tier": 1,
+      "tests": "History/downsampling tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.05",
+      "phase": 8,
+      "requirement": "Time-aware downsampling with gaps",
+      "implementation": "Sources/MemoriaCore/History.swift",
+      "tier": 1,
+      "tests": "Clock/gap tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.06",
+      "phase": 8,
+      "requirement": "Bound aggregate histories and metric cardinality",
+      "implementation": "History.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Bounds/churn tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.07",
+      "phase": 8,
+      "requirement": "Opt-in persistent recording with quota/retention/deletion",
+      "implementation": "Recording.swift; App/SettingsView.swift",
+      "tier": 1,
+      "tests": "Quota/recovery/delete tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.08",
+      "phase": 8,
+      "requirement": "JSON/CSV aggregate-only export with explicit scope",
+      "implementation": "History.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Export round trip",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.09",
+      "phase": 8,
+      "requirement": "Exclude arguments/sensitive metadata from routine logs",
+      "implementation": "Recording.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Privacy inspection",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.10",
+      "phase": 8,
+      "requirement": "Configurable alerts with hysteresis and notification permission",
+      "implementation": "History.swift; App/AppModel.swift; SettingsView.swift",
+      "tier": 1,
+      "tests": "Alert/denied-permission tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.11",
+      "phase": 8,
+      "requirement": "Reduce work when hidden, in Low Power Mode or thermally constrained",
+      "implementation": "TelemetryCoordinator.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Sampling/profile tests",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.12",
+      "phase": 8,
+      "requirement": "Pause/rebaseline on sleep and preserve chart gaps",
+      "implementation": "TelemetryCoordinator.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "Sleep/resume test",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.13",
+      "phase": 8,
+      "requirement": "Continue menu-bar and alert aggregate collection",
+      "implementation": "TelemetryCoordinator.swift",
+      "tier": 1,
+      "tests": "Background sampling check",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.14",
+      "phase": 8,
+      "requirement": "Native keyboard/accessibility conventions and semantic appearance",
+      "implementation": "App",
+      "tier": 1,
+      "tests": "VoiceOver/keyboard/reduced-transparency checks",
+      "evidence": "Source present; verification pending",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.15",
+      "phase": 8,
+      "requirement": "Detailed history for selected/pinned processes only",
+      "implementation": "App/AppModel.swift; App/Views.swift",
+      "tier": 1,
+      "tests": "Retention and pin lifecycle tests",
+      "evidence": "Selected identity plus at most eight pinned identities; interactive verification outstanding",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.16",
+      "phase": 8,
+      "requirement": "Exhaustive VoiceOver, resize and reduced-motion verification",
+      "implementation": "UITests; App",
+      "tier": 1,
+      "tests": "Interactive acceptance",
+      "evidence": "App aborts during macOS registration; Xcode UI runner also blocked by missing component",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.01",
+      "phase": 9,
+      "requirement": "Debug and Release Xcode builds without first-party warnings",
+      "implementation": "Memoria.xcodeproj",
+      "tier": 1,
+      "tests": "xcodebuild",
+      "evidence": "Xcode missing CoreSimulator component; direct compilation is separate evidence",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.02",
+      "phase": 9,
+      "requirement": "Swift core and provider build verification",
+      "implementation": "Scripts/direct-build.py",
+      "tier": 1,
+      "tests": "SDK-explicit warnings-as-errors build",
+      "evidence": "Evidence/README.md (local log withheld) and release-build.txt: SDK-explicit ARM64 Swift 6 builds with strict concurrency and warnings as errors; Xcode project build remains separately blocked.",
+      "status": "Verified"
+    },
+    {
+      "id": "P9.03",
+      "phase": 9,
+      "requirement": "Run complete automated acceptance suite",
+      "implementation": "Tests; UITests",
+      "tier": 1,
+      "tests": "Swift Testing/XCTest/Rust",
+      "evidence": "55 Swift tests in each Debug/optimised-library run and 2 Rust tests passed; native CPU/memory/owned-child checks passed. XCUITest, live widgets, Free Port and signed/hardware scenarios remain unverified.",
+      "status": "Implemented"
+    },
+    {
+      "id": "P9.04",
+      "phase": 9,
+      "requirement": "Validate clean checkout and locked dependency build",
+      "implementation": "Scripts; Worker/Cargo.lock",
+      "tier": 1,
+      "tests": "Clean rebuild",
+      "evidence": "Actual repository remains unwritable; locked worker build verified in staging",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.05",
+      "phase": 9,
+      "requirement": "Profile CPU/allocations/contention/leaks/energy in Instruments",
+      "implementation": "\u2014",
+      "tier": 1,
+      "tests": "Foreground/background Instruments profile",
+      "evidence": "Interactive profiling environment required",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.06",
+      "phase": 9,
+      "requirement": "Measure warm Quick Task Manager p95 below 200 ms",
+      "implementation": "UITests",
+      "tier": 1,
+      "tests": "Repeated warm-presentation benchmark",
+      "evidence": "GUI launch aborts during macOS registration; no valid presentation measurement.",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.07",
+      "phase": 9,
+      "requirement": "Measure 5,000-row search/filter p95 below 100 ms",
+      "implementation": "Tests/MemoriaCoreTests/CoreTests.swift",
+      "tier": 1,
+      "tests": "Filter benchmark",
+      "evidence": "Evidence/README.md (local log withheld) and swift-tests-debug.txt: 5,000-row core filter/sort passes 100 ms p95; full UI search response and M2 Pro performance remain unverified.",
+      "status": "Implemented"
+    },
+    {
+      "id": "P9.08",
+      "phase": 9,
+      "requirement": "Measure monitoring CPU budgets and baseline footprint",
+      "implementation": "\u2014",
+      "tier": 1,
+      "tests": "M2 Pro foreground/background profile",
+      "evidence": "Hardware validation/profile not established",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.09",
+      "phase": 9,
+      "requirement": "Run eight-hour soak for queues/descriptors/tasks/processes",
+      "implementation": "\u2014",
+      "tier": 1,
+      "tests": "Real eight-hour run",
+      "evidence": "GUI runtime not established. Simulated history bounds are tested but do not substitute for a real soak.",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.10",
+      "phase": 9,
+      "requirement": "Verify Slack grouping, resource changes and quit in controlled session",
+      "implementation": "\u2014",
+      "tier": 1,
+      "tests": "User-approved disposable Slack session",
+      "evidence": "Requires a controlled interactive session; personal Slack was not terminated.",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.11",
+      "phase": 9,
+      "requirement": "Test other-user/protected-process boundaries safely",
+      "implementation": "\u2014",
+      "tier": 1,
+      "tests": "Dedicated isolated account/system",
+      "evidence": "Not authorised on everyday processes",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.12",
+      "phase": 9,
+      "requirement": "Sign nested executables and app with Hardened Runtime",
+      "implementation": "Memoria.xcodeproj; Documentation/Distribution.md",
+      "tier": 1,
+      "tests": "Developer ID archive",
+      "evidence": "No signing identity",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.13",
+      "phase": 9,
+      "requirement": "Notarise, staple and verify Gatekeeper externally",
+      "implementation": "Documentation/Distribution.md",
+      "tier": 1,
+      "tests": "Clean external installation",
+      "evidence": "No credentials/distribution artefact",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.14",
+      "phase": 9,
+      "requirement": "Test installation, upgrades, helper revocation and uninstall",
+      "implementation": "Documentation/Distribution.md",
+      "tier": 1,
+      "tests": "Distributed-package lifecycle",
+      "evidence": "Signed package and isolated system required",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P9.15",
+      "phase": 9,
+      "requirement": "Deliver README/build/threat/audit/SBOM/notices/compatibility/issues",
+      "implementation": "Documentation; README.md",
+      "tier": 1,
+      "tests": "Documentation cross-check",
+      "evidence": "Source delivery",
+      "status": "Implemented"
+    },
+    {
+      "id": "P9.16",
+      "phase": 9,
+      "requirement": "Assess reduced App Store edition",
+      "implementation": "Documentation/Distribution.md",
+      "tier": 1,
+      "tests": "Distribution assessment",
+      "evidence": "No App Store eligibility claim",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.17",
+      "phase": 8,
+      "requirement": "Ranked, sortable and filterable process lists in every tab",
+      "implementation": "App/Views.swift; App/ProcessViews.swift; Sources/MemoriaCore/ProcessRanking.swift",
+      "tier": 1,
+      "tests": "RankingTests; MemoriaUITests",
+      "evidence": "Evidence/RankingVerification.json; Evidence/README.md (local log withheld) and swift-tests-debug.txt: core ranking tests pass. SDK compilation and UI-test type-checking pass; live dashboard/table acceptance remains blocked by GUI launch.",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.18",
+      "phase": 8,
+      "requirement": "Independent tab ranking controls, sensible defaults and missing-last ordering",
+      "implementation": "Sources/MemoriaCore/Processes.swift; Sources/MemoriaCore/ProcessRanking.swift; App/AppModel.swift",
+      "tier": 1,
+      "tests": "RankingTests",
+      "evidence": "Evidence/RankingVerification.json; Evidence/README.md (local log withheld) and swift-tests-debug.txt: core ranking tests pass. SDK compilation and UI-test type-checking pass; live dashboard/table acceptance remains blocked by GUI launch.",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.19",
+      "phase": 8,
+      "requirement": "Optional simplified main-window view with charts and top ten processes",
+      "implementation": "App/SimpleDashboardView.swift; App/Views.swift; App/SettingsView.swift",
+      "tier": 1,
+      "tests": "TopProcessesTests; MemoriaUITests",
+      "evidence": "Evidence/SimplifiedViewVerification.json: both compiler builds pass; UI test source type-checks. Live layout, switching, persistence and accessibility acceptance remain blocked by the existing GUI launch issue.",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.20",
+      "phase": 8,
+      "requirement": "Top-ten summary ranks measured resources before limiting rows",
+      "implementation": "Sources/MemoriaCore/TopProcesses.swift",
+      "tier": 1,
+      "tests": "TopProcessesTests",
+      "evidence": "Tests/MemoriaCoreTests/TopProcessesTests.swift; Evidence/README.md (local log withheld) and swift-tests-debug.txt: zero to 5,000 rows, correct highest ten, missing/invalid exclusion, measured zero, stable ties and associated-application scope.",
+      "status": "Verified"
+    },
+    {
+      "id": "P8.21",
+      "phase": 8,
+      "requirement": "Configurable menu-bar readings and chart popover",
+      "implementation": "App/MenuBarMonitor.swift; App/SettingsView.swift; App/MemoriaApp.swift",
+      "tier": 1,
+      "tests": "WidgetTests; interactive menu/window lifecycle",
+      "evidence": "Evidence/WidgetVerification.json: menu formatting tests and compilation pass. Preferences, appearance and window lifecycle require live GUI acceptance.",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.22",
+      "phase": 8,
+      "requirement": "Small and medium macOS WidgetKit extension",
+      "implementation": "Widget/MemoriaWidget.swift; Memoria.xcodeproj; Configuration",
+      "tier": 1,
+      "tests": "Extension compiler/link checks; signed gallery acceptance",
+      "evidence": "Evidence/WidgetVerification.json: Debug/optimised extension compiles and links only its aggregate support module and system frameworks. Gallery activation and signed-container delivery remain unverified.",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.23",
+      "phase": 8,
+      "requirement": "Bounded private widget cache with explicit freshness and safe navigation",
+      "implementation": "Sources/MemoriaWidgetSupport; App/WidgetPublisher.swift",
+      "tier": 1,
+      "tests": "WidgetTests",
+      "evidence": "Tests/MemoriaCoreTests/WidgetTests.swift; Evidence/README.md (local log withheld) and swift-tests-debug.txt. Model/store checks cover schema, privacy keys, nil/zero, size, cadence, cache permissions/deletion and navigation-only URLs. This verifies local policy, not live OS App Group or widget delivery.",
+      "status": "Verified"
+    },
+    {
+      "id": "P9.17",
+      "phase": 9,
+      "requirement": "Verify signed widget gallery and shared App Group delivery",
+      "implementation": "Documentation/Widgets.md; Configuration",
+      "tier": 1,
+      "tests": "Signed widget installation and lifecycle",
+      "evidence": "No configured signing identity; GUI launch unresolved",
+      "status": "Blocked externally"
+    },
+    {
+      "id": "P8.24",
+      "phase": 8,
+      "requirement": "Original brain mark with light, dark and small-size bitmap exports",
+      "implementation": "Branding; Scripts/build-icons.py; Scripts/export-icons.swift",
+      "tier": 1,
+      "tests": "ImageIO size/profile/alpha and ICNS round trips; visual proof",
+      "evidence": "Evidence/IconVerification.json and IconImageMetadata.json; Branding/Preview.png. 60 PNGs checked, three ICNS files each decoded with ten 1x/2x representations, small-size artwork visually reviewed. This does not verify native Icon Composer or live OS appearance.",
+      "status": "Verified"
+    },
+    {
+      "id": "P8.25",
+      "phase": 8,
+      "requirement": "Brain identity in application, widget and menu bar",
+      "implementation": "App/BrandMark.swift; App/Resources; Widget/MemoriaWidget.swift; Memoria.xcodeproj",
+      "tier": 1,
+      "tests": "Compiler, resource and bundle checks; live UI acceptance",
+      "evidence": "System-coloured alpha templates; default ICNS in development bundle",
+      "status": "Implemented"
+    },
+    {
+      "id": "P8.26",
+      "phase": 8,
+      "requirement": "Layered Icon Composer source with default, dark and mono annotations",
+      "implementation": "Branding/Memoria.icon; Scripts/generate-project.py",
+      "tier": 1,
+      "tests": "Native document build and appearance review",
+      "evidence": "Unmasked foreground and separate background; native decoding/rendering not verified",
+      "status": "Implemented"
+    },
+    {
+      "id": "P9.18",
+      "phase": 9,
+      "requirement": "Verify native icon rendering and system appearance selection",
+      "implementation": "Branding/README.md; Evidence/README.md",
+      "tier": 1,
+      "tests": "Icon Composer, Dock, Finder and dark/tinted/clear checks",
+      "evidence": "LaunchServices FileWrapper error on Apple's own template; asset compiler and GUI environment unresolved",
+      "status": "Blocked externally"
+    }
+  ]
+}

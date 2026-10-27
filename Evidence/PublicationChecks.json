@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "date": "2026-10-27",
+  "publication": "Memoria app v.10",
+  "source": "Git commit containing this file",
+  "freshPublishingCheckout": {
+    "swiftCSDKBuild": {
+      "configuration": "Debug",
+      "architecture": "arm64",
+      "languageMode": 6,
+      "strictConcurrency": true,
+      "warningsAsErrors": true,
+      "outcome": "passed"
+    },
+    "swiftTests": {
+      "passed": 55,
+      "suites": 11
+    },
+    "workerBuild": {
+      "configuration": "Release",
+      "target": "aarch64-apple-darwin",
+      "locked": true,
+      "offline": true,
+      "outcome": "passed"
+    },
+    "workerTests": {
+      "passed": 2,
+      "locked": true,
+      "offline": true
+    },
+    "vendorIntegrity": {
+      "fileDigestsVerified": 1007,
+      "unusedCLISourceFilesOmitted": 17,
+      "retainedLibrarySourceUnchanged": true
+    },
+    "firstPartyWhitespaceCheck": "passed"
+  },
+  "publicationHygiene": {
+    "gitleaksVersion": "8.30.1",
+    "initialFindings": 8,
+    "reviewedFindings": "Cargo checksum SHA-256 values; narrowly excluded by path and 64-hex pattern after integrity validation",
+    "unresolvedSecretFindings": 0,
+    "stagedBlobPrivacyCheck": "passed",
+    "excluded": [
+      "raw runtime evidence",
+      "captured process identities",
+      "personal filesystem paths",
+      "credentials and signing material",
+      "compiled executables",
+      "caches",
+      "recordings and exports"
+    ],
+    "retained": [
+      "process-management source",
+      "synthetic test identities",
+      "original image-generation provenance",
+      "required upstream licences"
+    ],
+    "artworkMetadata": "PNG EXIF fields contain image dimensions, colour space and resolution only",
+    "authorEmail": "GitHub noreply"
+  },
+  "previousVerification": "See VerificationSummary.json for earlier optimised Swift and native workload results; their scope remains unchanged.",
+  "unverified": [
+    "graphical application acceptance",
+    "Xcode project execution",
+    "widget activation and signed App Group delivery",
+    "native Icon Composer system rendering",
+    "M2 Pro identity and advanced sensor accuracy",
+    "controlled Free Port",
+    "signed helper cross-user operations",
+    "Endpoint Security",
+    "production signing and notarisation",
+    "Instruments budgets and real eight-hour soak"
+  ],
+  "securityScope": "Source publication hygiene and targeted policy review; not an independent security certification."
+}

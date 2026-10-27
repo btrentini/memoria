@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-27",
+  "cleanDirectBuilds": {
+    "Debug": "passed",
+    "optimised": "passed",
+    "architecture": "arm64",
+    "swiftLanguage": 6,
+    "strictConcurrency": true,
+    "warningsAsErrors": true
+  },
+  "swiftTests": {
+    "Debug": {
+      "passed": 55,
+      "suites": 11
+    },
+    "optimised": {
+      "passed": 55,
+      "suites": 11
+    },
+    "scopeNote": "55 tests last run during widget verification; branding changed presentation/resources only and was verified through builds and image/bundle checks."
+  },
+  "rustTests": {
+    "passed": 2
+  },
+  "nativeWorkloads": {
+    "oneThreadCPU": "passed",
+    "twoThreadCPU": "passed",
+    "touchedMemory": "passed",
+    "ownedChildSIGTERM": "passed",
+    "controlledSocketBinding": "unavailable in session"
+  },
+  "filter5000P95Milliseconds": {
+    "debug": 16.46929164417088,
+    "release": 6.7458333214744925
+  },
+  "filterScope": "Core filtering/sorting only; excludes UI dispatch and rendering; hardware model unverified",
+  "vendorDigestsVerified": 1024,
+  "sbomPackages": 18,
+  "guiLaunch": "unresolved; no runtime acceptance",
+  "developmentBundleSignature": "App and embedded widget ad-hoc strict verification passed; no shared App Group configured",
+  "releaseSigning": "blocked: no credentials",
+  "xcodeProjectBuild": "blocked: installed CoreSimulator dependency absent",
+  "widgets": {
+    "menuBar": "implemented; live GUI verification blocked",
+    "desktop": "small/medium extension compiled; signed gallery and App Group delivery unverified",
+    "policyTests": 9
+  },
+  "branding": {
+    "bitmapExports": "verified; see Evidence/IconVerification.json",
+    "integration": "compiled and packaged; live acceptance pending",
+    "nativeIconComposer": "blocked by LaunchServices/IDE environment"
+  },
+  "vendorDigestScope": "Earlier full vendor tree; unused CLI files omitted for publication. See PublicationChecks.json for current subset."
+}

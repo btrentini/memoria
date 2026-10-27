@@ -1,0 +1,17 @@
+[package]
+name = "macmon"
+version = "0.10.0"
+edition = "2024"
+license = "MIT"
+autobins = false
+[features]
+default = []
+app = []
+[dependencies]
+core-foundation = "=0.10.1"
+libc = "=0.2.190"
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+[package.metadata.upstream]
+repository = "https://github.com/vladkens/macmon"
+revision = "39e98aa73e49256e6281b2a228f6ef3499ae3209"

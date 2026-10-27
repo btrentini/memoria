@@ -1,0 +1,523 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "Memoria application, widget extension and optional worker",
+  "documentNamespace": "https://github.com/btrentini/memoria/sbom/0.1.0-22c32d2bb8f0ea64",
+  "creationInfo": {
+    "created": "2026-10-27T00:00:00Z",
+    "creators": [
+      "Tool: Memoria Scripts/sbom.py"
+    ],
+    "comment": "Audit date; exact scan time retained in evidence. System frameworks excluded from packaged dependencies."
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Memoria",
+      "name": "Memoria",
+      "versionInfo": "0.1.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "Copyright 2026 Bruno Trentini",
+      "description": "Stable Swift/C application and shared widget support module; no third-party package dependency."
+    },
+    {
+      "SPDXID": "SPDXRef-MemoriaWidget",
+      "name": "MemoriaWidget",
+      "versionInfo": "0.1.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "Copyright 2026 Bruno Trentini",
+      "description": "Sandboxed WidgetKit extension; first-party aggregate snapshot support and Apple system frameworks only."
+    },
+    {
+      "SPDXID": "SPDXRef-core-foundation",
+      "name": "core-foundation",
+      "versionInfo": "0.10.1",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/core-foundation/0.10.1/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b2a6cd9ae233e7f62ba4e9353e81a88df7fc8a5987b8d445b4d90c879bd156f6"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/core-foundation@0.10.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-core-foundation-sys",
+      "name": "core-foundation-sys",
+      "versionInfo": "0.8.7",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/core-foundation-sys/0.8.7/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/core-foundation-sys@0.8.7"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-itoa",
+      "name": "itoa",
+      "versionInfo": "1.0.18",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/itoa/1.0.18/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/itoa@1.0.18"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-libc",
+      "name": "libc",
+      "versionInfo": "0.2.190",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/libc/0.2.190/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ce5d3ddc6d3fa000eb1536d85e147bfe31aacaba692ed6a876f95cb7c855be78"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/libc@0.2.190"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-macmon",
+      "name": "macmon",
+      "versionInfo": "0.10.0",
+      "filesAnalyzed": false,
+      "downloadLocation": "git+https://github.com/vladkens/macmon.git@39e98aa73e49256e6281b2a228f6ef3499ae3209",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "description": "Retained library source unchanged; unused CLI/server source omitted and manifest replaced with a library-only manifest. See Worker/MODIFICATIONS.md."
+    },
+    {
+      "SPDXID": "SPDXRef-memchr",
+      "name": "memchr",
+      "versionInfo": "2.8.3",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/memchr/2.8.3/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Unlicense OR MIT",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/memchr@2.8.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-memoria-worker",
+      "name": "memoria-worker",
+      "versionInfo": "0.1.0",
+      "filesAnalyzed": false,
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-proc-macro2",
+      "name": "proc-macro2",
+      "versionInfo": "1.0.107",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/proc-macro2/1.0.107/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/proc-macro2@1.0.107"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-quote",
+      "name": "quote",
+      "versionInfo": "1.0.47",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/quote/1.0.47/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/quote@1.0.47"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-serde",
+      "name": "serde",
+      "versionInfo": "1.0.229",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/serde/1.0.229/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/serde@1.0.229"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-serde_core",
+      "name": "serde_core",
+      "versionInfo": "1.0.229",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/serde_core/1.0.229/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/serde_core@1.0.229"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-serde_derive",
+      "name": "serde_derive",
+      "versionInfo": "1.0.229",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/serde_derive/1.0.229/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/serde_derive@1.0.229"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-serde_json",
+      "name": "serde_json",
+      "versionInfo": "1.0.151",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/serde_json/1.0.151/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c841b55ecdae098c80dcae9cf767f6f8a0c2cdb3416bbef72181df4d0fe73f14"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/serde_json@1.0.151"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-syn",
+      "name": "syn",
+      "versionInfo": "3.0.6",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/syn/3.0.6/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/syn@3.0.6"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-unicode-ident",
+      "name": "unicode-ident",
+      "versionInfo": "1.0.26",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/unicode-ident/1.0.26/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "(MIT OR Apache-2.0) AND Unicode-3.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d245f478577f809a851594d02313b640fb437e0bb33866753cff937863096954"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/unicode-ident@1.0.26"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-zmij",
+      "name": "zmij",
+      "versionInfo": "1.0.23",
+      "filesAnalyzed": false,
+      "downloadLocation": "https://crates.io/api/v1/crates/zmij/1.0.23/download",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "29666d0abbfad1e3dc4dcf6144730dd3a3ab225bbbdac83319345b1b44ccfc1b"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/zmij@1.0.23"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Memoria"
+    },
+    {
+      "spdxElementId": "SPDXRef-Memoria",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-MemoriaWidget"
+    },
+    {
+      "spdxElementId": "SPDXRef-core-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-core-foundation-sys"
+    },
+    {
+      "spdxElementId": "SPDXRef-core-foundation",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-libc"
+    },
+    {
+      "spdxElementId": "SPDXRef-macmon",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-core-foundation"
+    },
+    {
+      "spdxElementId": "SPDXRef-macmon",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-libc"
+    },
+    {
+      "spdxElementId": "SPDXRef-macmon",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde"
+    },
+    {
+      "spdxElementId": "SPDXRef-macmon",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde_json"
+    },
+    {
+      "spdxElementId": "SPDXRef-memoria-worker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-libc"
+    },
+    {
+      "spdxElementId": "SPDXRef-memoria-worker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-macmon"
+    },
+    {
+      "spdxElementId": "SPDXRef-memoria-worker",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde_json"
+    },
+    {
+      "spdxElementId": "SPDXRef-proc-macro2",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-unicode-ident"
+    },
+    {
+      "spdxElementId": "SPDXRef-quote",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-proc-macro2"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde_core"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde_derive"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde_derive"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_derive",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-proc-macro2"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_derive",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-quote"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_derive",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-syn"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_json",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-itoa"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_json",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-memchr"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_json",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_json",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-serde_core"
+    },
+    {
+      "spdxElementId": "SPDXRef-serde_json",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-zmij"
+    },
+    {
+      "spdxElementId": "SPDXRef-syn",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-proc-macro2"
+    },
+    {
+      "spdxElementId": "SPDXRef-syn",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-quote"
+    },
+    {
+      "spdxElementId": "SPDXRef-syn",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-unicode-ident"
+    },
+    {
+      "spdxElementId": "SPDXRef-memoria-worker",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Memoria"
+    }
+  ]
+}

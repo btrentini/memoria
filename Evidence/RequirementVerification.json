@@ -1,0 +1,142 @@
+{
+  "One-core process percentages and labelled machine-normalisation": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld); Evidence/README.md (local log withheld). One/two-thread CPU and footprint checks; no independent chip-model claim."
+  },
+  "Collect CPU time, RSS and physical footprint": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld); Evidence/README.md (local log withheld). One/two-thread CPU and footprint checks; no independent chip-model claim."
+  },
+  "Collect host/per-core user/system/idle deltas": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld) and native-tests.txt: 12 host CPU counters sampled; Evidence/README.md (local log withheld) tests delta arithmetic and reset handling. GUI and independent host-load comparison remain open."
+  },
+  "Discover core count and avoid unverified P/E labels": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): 12 cores reported. Presentation source uses core indices without inferred P/E assignments; chip identity remains unavailable."
+  },
+  "Group exact bundle paths and inferred ancestry": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Keep shared/unassigned services separate": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "SIGTERM and explicit confirmed SIGKILL": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Revalidate start, boot and executable before every signal": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Reject invalid PIDs, PID 1 and own infrastructure": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Revalidate every selected tree target": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Never automatically escalate SIGTERM": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Observe exit separately from signal delivery": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Preserve errno without assuming SIP protection": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Generate fixed numeric Terminal commands without execution": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Validate port formats/ranges including bracketed IPv6 and URLs": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Bound lsof runtime, output and cancellation": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld): controlled policy/parser/backend tests. Live GUI, Free Port and privileged acceptance remain separate gates."
+  },
+  "Pinned macmon library worker with app features disabled": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld); Evidence/README.md (local log withheld): ARM64 --locked --offline build; no CLI/server dependency path."
+  },
+  "Generate SPDX inventory and attribution": {
+    "status": "Verified",
+    "evidence": "Documentation/SBOM.spdx.json generated from resolved lock; ThirdPartyNotices/NOTICE.md; cross-reference validation and 1,024 vendor digests."
+  },
+  "Scan dependencies for advisories": {
+    "status": "Verified",
+    "evidence": "Evidence/osv-query.json and osv-response.json: no OSV matches for fourteen exact registry versions; Git/private-API coverage excluded."
+  },
+  "Measure 5,000-row search/filter p95 below 100 ms": {
+    "status": "Implemented",
+    "evidence": "Evidence/README.md (local log withheld) and swift-tests-debug.txt: 5,000-row core filter/sort passes 100 ms p95; full UI search response and M2 Pro performance remain unverified."
+  },
+  "Run complete automated acceptance suite": {
+    "status": "Implemented",
+    "evidence": "55 Swift tests in each Debug/optimised-library run and 2 Rust tests passed; native CPU/memory/owned-child checks passed. XCUITest, live widgets, Free Port and signed/hardware scenarios remain unverified."
+  },
+  "Fixed-purpose powermetrics only after validation": {
+    "status": "Blocked externally",
+    "evidence": "Not exposed. Privileged schema/overhead validation and signed operation review required before implementation."
+  },
+  "Measure warm Quick Task Manager p95 below 200 ms": {
+    "status": "Blocked externally",
+    "evidence": "GUI launch aborts during macOS registration; no valid presentation measurement."
+  },
+  "Run eight-hour soak for queues/descriptors/tasks/processes": {
+    "status": "Blocked externally",
+    "evidence": "GUI runtime not established. Simulated history bounds are tested but do not substitute for a real soak."
+  },
+  "Verify Slack grouping, resource changes and quit in controlled session": {
+    "status": "Blocked externally",
+    "evidence": "Requires a controlled interactive session; personal Slack was not terminated."
+  },
+  "Swift core and provider build verification": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (local log withheld) and release-build.txt: SDK-explicit ARM64 Swift 6 builds with strict concurrency and warnings as errors; Xcode project build remains separately blocked."
+  },
+  "Fail closed when signing credentials absent": {
+    "status": "Verified",
+    "evidence": "Evidence/README.md (unsigned helper refused to listen, exit 78): helper refused to listen and exited 78 with no signing team configured. Signed peer-validation and installation remain unverified."
+  },
+  "Ranked, sortable and filterable process lists in every tab": {
+    "status": "Implemented",
+    "evidence": "Evidence/RankingVerification.json; Evidence/README.md (local log withheld) and swift-tests-debug.txt: core ranking tests pass. SDK compilation and UI-test type-checking pass; live dashboard/table acceptance remains blocked by GUI launch."
+  },
+  "Independent tab ranking controls, sensible defaults and missing-last ordering": {
+    "status": "Implemented",
+    "evidence": "Evidence/RankingVerification.json; Evidence/README.md (local log withheld) and swift-tests-debug.txt: core ranking tests pass. SDK compilation and UI-test type-checking pass; live dashboard/table acceptance remains blocked by GUI launch."
+  },
+  "Optional simplified main-window view with charts and top ten processes": {
+    "status": "Implemented",
+    "evidence": "Evidence/SimplifiedViewVerification.json: both compiler builds pass; UI test source type-checks. Live layout, switching, persistence and accessibility acceptance remain blocked by the existing GUI launch issue."
+  },
+  "Top-ten summary ranks measured resources before limiting rows": {
+    "status": "Verified",
+    "evidence": "Tests/MemoriaCoreTests/TopProcessesTests.swift; Evidence/README.md (local log withheld) and swift-tests-debug.txt: zero to 5,000 rows, correct highest ten, missing/invalid exclusion, measured zero, stable ties and associated-application scope."
+  },
+  "Configurable menu-bar readings and chart popover": {
+    "status": "Implemented",
+    "evidence": "Evidence/WidgetVerification.json: menu formatting tests and compilation pass. Preferences, appearance and window lifecycle require live GUI acceptance."
+  },
+  "Small and medium macOS WidgetKit extension": {
+    "status": "Implemented",
+    "evidence": "Evidence/WidgetVerification.json: Debug/optimised extension compiles and links only its aggregate support module and system frameworks. Gallery activation and signed-container delivery remain unverified."
+  },
+  "Bounded private widget cache with explicit freshness and safe navigation": {
+    "status": "Verified",
+    "evidence": "Tests/MemoriaCoreTests/WidgetTests.swift; Evidence/README.md (local log withheld) and swift-tests-debug.txt. Model/store checks cover schema, privacy keys, nil/zero, size, cadence, cache permissions/deletion and navigation-only URLs. This verifies local policy, not live OS App Group or widget delivery."
+  },
+  "Original brain mark with light, dark and small-size bitmap exports": {
+    "status": "Verified",
+    "evidence": "Evidence/IconVerification.json and IconImageMetadata.json; Branding/Preview.png. 60 PNGs checked, three ICNS files each decoded with ten 1x/2x representations, small-size artwork visually reviewed. This does not verify native Icon Composer or live OS appearance."
+  }
+}

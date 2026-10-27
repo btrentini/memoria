@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-27",
+  "tabs": 12,
+  "separateQuickWindow": true,
+  "sorts": [
+    "CPU",
+    "memory footprint",
+    "resident memory",
+    "threads",
+    "combined I/O",
+    "reads",
+    "writes",
+    "name",
+    "PID",
+    "owner UID",
+    "state"
+  ],
+  "defaults": {
+    "CPU": "CPU descending",
+    "Memory": "footprint descending",
+    "Storage": "combined I/O descending",
+    "Applications": "application-associated processes; footprint descending"
+  },
+  "filters": [
+    "name/PID/path/port search",
+    "scope",
+    "process state",
+    "minimum CPU",
+    "minimum footprint",
+    "all/measured/positive values"
+  ],
+  "policyChecks": "55 Swift tests across 11 suites passed in both Debug and optimised-library builds; includes eight ranking test functions",
+  "searchPrivacy": "Query text kept in memory; persisted controls exclude the query",
+  "uiTests": {
+    "typeCheck": "passed",
+    "runtime": "blocked by existing GUI/Xcode environment issues"
+  },
+  "attribution": "Per-process GPU, Neural Engine, network and energy readings remain unavailable; common process metrics are explicitly labelled"
+}

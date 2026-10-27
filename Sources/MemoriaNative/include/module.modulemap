@@ -1,0 +1,4 @@
+module MemoriaNative {
+    header "MemoriaNative.h"
+    export *
+}
