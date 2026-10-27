@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "date": "2026-10-27",
+  "scope": "Shared lifecycle policy and live sandboxed App Store preview; no real login registration",
+  "defaults": {
+    "agentInfoPlist": true,
+    "dockVisible": false,
+    "monitorOpensAutomatically": false,
+    "menuBarAlwaysPresent": true
+  },
+  "unitTests": {
+    "passed": 5,
+    "suite": "Menu-bar lifecycle and login policy",
+    "cases": [
+      "Explicit opt-in and idempotent registration/removal",
+      "Pending approval differs from enabled",
+      "Revocation is not silently reversed",
+      "Denial and temporary installation remain unavailable",
+      "Installation path boundaries"
+    ]
+  },
+  "runtime": {
+    "edition": "App Store SDK-explicit ad-hoc preview",
+    "quietLaunch": "Observed running background application with zero windows",
+    "menu": "Live CPU/memory readings and popover observed",
+    "openMonitor": "Opened Memoria from the menu while background-only remained true",
+    "closeMonitor": "Window count returned to zero; process and live menu readings remained",
+    "settings": "Background and startup controls and installation explanation observed",
+    "dockSwitch": "Off -> on -> off changed background-only true -> false -> true; left off",
+    "temporaryLoginControl": "Disabled; unavailable status and Applications instruction observed",
+    "limits": "The listed local checks were observed. Later automation attempts returned AppleEvent timeout/handler errors; final signed acceptance and direct-edition live UI remain unresolved."
+  },
+  "loginItemRegistered": false,
+  "externalGates": [
+    "Permanent installation and actual log-out/log-in/removal test",
+    "Signed distribution and provisioned widget activation",
+    "Direct-edition live UI verification"
+  ],
+  "privacy": "Contains no captured process IDs, arguments, paths, machine identifiers or credentials"
+}

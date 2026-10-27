@@ -1,6 +1,6 @@
 {
   "date": "2026-10-27",
-  "generation": "Built-in image_gen; selected originals and full prompts retained under Branding/Source",
+  "generation": "Built-in image_gen; revised brain masters, simplified menu master and provenance in Branding/Source",
   "design": "Original paired-hemisphere brain; cobalt/porcelain default and brighter blue/midnight dark",
   "appearances": [
     "Default/light bitmap",
@@ -36,7 +36,7 @@
       18,
       36
     ],
-    "type": "black alpha template; SwiftUI renderingMode(template)"
+    "type": "Separate simplified black alpha glyph; explicit AppKit isTemplate and SwiftUI template rendering"
   },
   "largerTemplate": {
     "points": 32,
@@ -46,9 +46,10 @@
     ]
   },
   "pngMetadata": {
-    "checked": 60,
+    "checked": 71,
     "status": "passed",
-    "evidence": "Evidence/IconImageMetadata.json"
+    "evidence": "Evidence/IconImageMetadata.json",
+    "scope": "All 71 PNG dimensions and embedded colour profiles independently checked; all menu/control assets are black alpha templates."
   },
   "icns": {
     "encoder": "Apple ImageIO",
@@ -62,9 +63,8 @@
     "kind": "artwork proof, not live OS screenshot"
   },
   "builds": {
-    "Debug": "clean SDK-explicit Swift 6 build passed",
-    "Release": "clean optimised SDK-explicit Swift 6 build passed",
-    "warningsAsErrors": true
+    "StoreRelease": "Optimised SDK-explicit build passed with Swift 6 strict concurrency and warnings-as-errors",
+    "DirectDebug": "SDK-explicit build passed with Swift 6 strict concurrency and warnings-as-errors; single frontend used for the app/widget rebuild"
   },
   "resourceIntegration": {
     "xcodeReferences": "passed static validation",
@@ -75,11 +75,18 @@
   },
   "nativeComposer": "Blocked before document decoding: FileWrapper NSCocoaError 256, underlying LaunchServices -10813, also reproduced on Apple Xcode template. Asset compiler has existing IDE initialisation failure.",
   "liveAcceptance": "Not verified: native document render, Dock/Finder, selected dark/tinted/clear appearances, live menu bar/widget appearance.",
-  "existingTests": "55 core/service tests passed in preceding widget verification; not rerun for artwork and resource-only changes.",
+  "existingTests": "All 55 core/service tests and 10 store/lifecycle tests passed for this snapshot.",
   "sources": [
     "https://developer.apple.com/design/human-interface-guidelines/app-icons",
     "https://developer.apple.com/icon-composer/",
     "https://developer.apple.com/documentation/xcode/creating-your-app-icon-using-icon-composer",
     "https://developer.apple.com/library/archive/documentation/General/Conceptual/MOSXAppProgrammingGuide/CommonAppBehaviors/CommonAppBehaviors.html"
+  ],
+  "revision": 2,
+  "templatePointSizes": [
+    16,
+    18,
+    24,
+    32
   ]
 }

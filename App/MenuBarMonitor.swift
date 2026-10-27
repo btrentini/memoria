@@ -1,9 +1,11 @@
 import SwiftUI
+import MemoriaLifecycle
 import Charts
 import MemoriaCore
 import MemoriaWidgetSupport
 
 struct MenuBarStatusLabel:View {
+    @Environment(\.openWindow) private var openWindow
     @Bindable var model:AppModel
     private var reading:MenuBarReading {MenuBarReading(rawValue:model.menuBarReading) ?? .both}
     var body:some View {
@@ -14,6 +16,7 @@ struct MenuBarStatusLabel:View {
             }
         }.accessibilityLabel(model.sleeping ? "Memoria. Monitoring paused for sleep.":"Memoria. CPU \(model.cpuText). Accounted memory \(Format.bytes(model.snapshot?.memory?.accounted)).")
             .task {model.start()}
+            .onReceive(NotificationCenter.default.publisher(for:BackgroundApplicationDelegate.reopenNotification)) {_ in openWindow(id:"main");NSApp.activate()}
     }
 }
 struct MenuPopover:View {

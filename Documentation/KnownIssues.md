@@ -16,3 +16,5 @@ This is a development source snapshot, not a production release.
 The requirements ledger contains the implementation and verification status for each supplied-plan item. An implemented source path is not a runtime pass.
 
 The brain icon's bitmap exports and local bundle integration are supplied. Icon Composer export fails with a LaunchServices FileWrapper error even for Apple's unmodified icon template; native document decoding and live dark/tinted/clear/Dock/Finder appearance remain unverified. The conventional .icns fallback is encoded and decoded through Apple ImageIO. See [icon evidence](../Branding/README.md).
+
+Background/login follow-up: local App Store quiet-launch, menu/window, settings and Dock-toggle checks passed. Subsequent UI automation returned AppleEvent timeout/handler errors, so complete acceptance of the final bundles remains open. Direct-edition live UI and a real login cycle are not claimed as verified. The exported icons, bundle resources, both SDK builds and 65 tests passed.

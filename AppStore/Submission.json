@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "status": "Preparation only; not ready for upload",
+  "name": "Memoria",
+  "bundleIdentifier": "fyi.trentini.memoria.store",
+  "widgetBundleIdentifier": "fyi.trentini.memoria.store.widget",
+  "version": "1.0.0",
+  "build": "1",
+  "primaryCategory": "public.app-category.utilities",
+  "secondaryCategory": null,
+  "primaryLanguage": "en-GB",
+  "sku": "memoria-macos-store",
+  "teamID": null,
+  "supportURL": null,
+  "privacyPolicyURL": null,
+  "marketingURL": null,
+  "reviewContact": null,
+  "priceAndTerritories": null,
+  "privacyLabelRecommendation": "Data Not Collected; recheck the final binary and developer practices",
+  "encryptionDeclaration": "No non-exempt encryption implemented by this app; operator must confirm the final submission answers",
+  "ageRatingRecommendation": "Answer the current questionnaire: no user content, chat, ads, violence, gambling, health advice or unrestricted web browsing. Apple calculates the rating.",
+  "screenshots": "Pending real signed-app captures; see Screenshots/README.md",
+  "releaseModeRecommendation": "Manual release after review",
+  "storeEntitlements": [
+    "App Sandbox",
+    "App Groups for aggregate widget cache"
+  ],
+  "excludedCapabilities": [
+    "privileged helper",
+    "private telemetry worker",
+    "process inspection/actions",
+    "Free Port",
+    "Endpoint Security",
+    "network client/server"
+  ],
+  "preparedAt": "2026-10-27"
+}

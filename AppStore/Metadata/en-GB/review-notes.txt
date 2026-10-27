@@ -1,0 +1,13 @@
+Memoria is a native, sandboxed system monitor. No account or demo credentials are required.
+
+Open the app and allow two samples for CPU and interface rates to appear. Use the sidebar for CPU, memory, network, power and privacy information. Use the toolbar to switch Simple view or pause monitoring. The menu-bar item remains available while the app is running; Quit Memoria ends collection.
+
+To test widgets, enable aggregate sharing in Settings, add the small or medium Memoria widget using macOS, and keep Memoria running. The timestamp identifies the cached sample; macOS schedules updates. Turning sharing off deletes the shared cache, although a displayed widget may remain until the next refresh.
+
+The App Store target links only first-party public-API collectors and the aggregate widget model. It contains no privileged helper, LaunchDaemon, Rust/private sensor worker, Endpoint Security client, process-control interface, subprocess runner, updater or network service. No network entitlement is requested. System memory accounting is active + wired + compressed; it is not labelled as unique physical memory usage. Interface rates are not summed across physical and tunnel interfaces.
+
+The shared container is used only for a bounded aggregate CPU/memory snapshot. The privacy manifest declares local settings, sampling intervals and local cache-file metadata. The app has an in-app privacy explanation.
+
+Release operator: complete the signed-build acceptance checks before using these notes for a submission. This draft does not assert that the current preparation kit has passed live acceptance.
+
+The app launches quietly in the menu bar with no Dock icon by default. Click the brain status item, then Open Memoria to view the dashboard or Settings to change preferences. Closing the dashboard keeps monitoring active; Quit Memoria stops it. Launch at login is optional and uses SMAppService.mainApp after explicit user opt-in. It is independent of the direct edition’s helper, which is absent from this target.

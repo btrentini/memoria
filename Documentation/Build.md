@@ -53,3 +53,5 @@ The fallback writes build/direct. MEMORIA_BUILD_FROM can resume a module after a
 ## Source publication
 
 The Git repository contains source, artwork, pinned worker dependencies and sanitised verification summaries. Build products, runtime captures and raw diagnostic logs are excluded. Build locally from a clean checkout; the commit identifies the published source snapshot. `python3 Scripts/package-source.py` archives the committed tree only.
+
+The SDK-explicit fallback compiles each module with one compiler frontend to avoid repeated framework imports. `MEMORIA_MODULE_CACHE` selects a reusable cache for the build and test scripts. This changes compilation scheduling, not application sandbox settings.

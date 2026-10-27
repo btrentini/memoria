@@ -2,7 +2,9 @@
   "mode": "Built-in image_gen",
   "tool": "image_gen.imagegen",
   "design": "Original Memoria brain mark; no copied SF Symbol or Apple artwork",
-  "prompts": [
+  "reproduction": "Normal asset builds use the checked-in PNG masters. Image generation is not a deterministic build dependency.",
+  "revision": 2,
+  "promptsFromPreviousRevision": [
     {
       "stage": "Initial foreground; rejected due to rough transparency edges",
       "prompt": "Use case: logo-brand.\nAsset type: original foreground artwork for Memoria, a native macOS performance monitor; to be placed over an Icon Composer background.\nDesign one elegant brain emblem, viewed straight on. Two balanced rounded cerebral hemispheres, a clear narrow vertical separation, and only two broad flowing folds in each hemisphere. The silhouette must read unmistakably as a brain, not a cloud, heart or tree. Suggest memory and calm technical precision through the shape itself.\nUse bold, beautifully drawn, smooth white paths with rounded ends and generous transparent negative spaces. Very simple vector-like flat white artwork; uniform solid white, no gradients or lighting in this foreground layer. The two hemispheres form one cohesive compact, slightly wider-than-tall symbol. No text, letters, eyes, face, circuits, nodes, chip pins, stems, anatomical realism or tiny detail.\nSingle isolated symbol on a genuinely transparent RGBA canvas, not a checkerboard. Square 1024 by 1024 composition. Centre the complete brain within about 680 by 650 pixels, leaving generous equal safety margins. All silhouette edges must be smooth and crisp and folds must remain readable when the whole canvas is reduced to 32 pixels.\nDo not add an app icon tile, rounded-square background, outline around the canvas, cast shadow, baked glass, bevel, texture, border, watermark, mockup or presentation sheet. This is the reusable flat white foreground layer only."
@@ -20,5 +22,21 @@
       "prompt": "Use case: precise-object-edit. Input image 1 is the edit target: Memoria's finished light app icon.\nCreate its DARK appearance by changing only the palette and surface lighting. Preserve the exact brain geometry, grooves, central separation, size, orientation and placement, and the square full-bleed layout.\nChange the pale background to a rich near-black midnight navy (#10172C), with only a very restrained midnight-blue gradient. Change the brain to luminous but solid periwinkle and ice-blue (#89B8FF to #6785ED), keeping gentle satin-glass depth and soft upper highlights. It must have strong contrast on the dark background without glowing, neon bloom or bright outlines. Preserve all negative-space folds as dark background. Keep the mark calm, precise and premium.\nNo added details, no texture, no grain, no shadows outside the canvas, no text, no borders, no mockup. No rounded outside corners: the square image remains unmasked. This is a matching production dark version of the exact same icon, not a new logo."
     }
   ],
-  "reproduction": "Normal asset builds use the checked-in PNG masters. Image generation is not a deterministic build dependency."
+  "revision2": {
+    "tool": "Built-in image_gen.imagegen",
+    "designInstructions": [
+      "Replace the abstract mark with a recognisable frontal brain, scalloped hemispheres, broad cortical folds, central fissure and a small stem. Flat cobalt foreground on transparent canvas.",
+      "Preserve the brain geometry for a porcelain and cobalt light app icon on an opaque square unmasked canvas with restrained shallow relief.",
+      "Create a matching dark appearance: midnight navy background and ice-blue brain; retain geometry, scale, folds and placement.",
+      "Derive a separate black alpha menu glyph with a simpler fold pattern and wider channels for small sizes.",
+      "Clean up the transparent foreground, preserving the brain anatomy while widening and clearing its central fissure and smoothing the cortical channels."
+    ],
+    "note": "Design instruction summary; prior revision prompts retained for provenance. Normal builds use these checked-in masters, not generation.",
+    "masters": {
+      "Brain-Cobalt-Original.png": "adf09af366e1621311669cadea8c3abcdd610afcf2346ede7e1cf2173dd258d5",
+      "Brain-Menu-Original.png": "664490836dbe707d08abfe4de8e8b79ad6bcc98e3794193357e41a5cf38ccc9b",
+      "Icon-Dark-Original.png": "69790398fa0a6c4919503e5c41283d35f5daa3f59692045fb7934b7ae72c6b24",
+      "Icon-Default-Original.png": "b86e1a0421ea43757ce075680bce57821f36d06ce4bfef49ed19c8b28075abc8"
+    }
+  }
 }

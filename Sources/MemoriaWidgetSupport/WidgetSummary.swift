@@ -76,11 +76,14 @@ public enum MenuBarReading:String,CaseIterable,Codable,Sendable {
 }
 public enum WidgetRoute:String,Sendable {
     case overview,cpu,memory,quick
-    public init?(url:URL) {
-        guard let parts=URLComponents(url:url,resolvingAgainstBaseURL:false),parts.scheme?.lowercased()=="memoria",
+    public init?(url:URL,expectedScheme:String="memoria") {
+        guard let parts=URLComponents(url:url,resolvingAgainstBaseURL:false),["memoria","memoria-store"].contains(expectedScheme),parts.scheme?.lowercased()==expectedScheme,
               parts.user==nil,parts.password==nil,parts.port==nil,parts.query==nil,parts.fragment==nil,
               parts.path.isEmpty,let host=parts.host,let route=Self(rawValue:host) else {return nil}
         self=route
     }
-    public var url:URL {URL(string:"memoria://"+rawValue)!}
+    public var url:URL {
+        let scheme=Bundle.main.object(forInfoDictionaryKey:"MemoriaURLScheme") as? String == "memoria-store" ? "memoria-store":"memoria"
+        return URL(string:scheme+"://"+rawValue)!
+    }
 }

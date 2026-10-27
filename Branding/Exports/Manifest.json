@@ -134,5 +134,11 @@
   ],
   "nativeRenderingVerified" : false,
   "nativeSource" : "Branding\/Memoria.icon",
-  "schema" : 1
+  "schema" : 1,
+  "templatePoints" : [
+    16,
+    18,
+    24,
+    32
+  ]
 }

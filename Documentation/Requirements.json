@@ -1602,6 +1602,50 @@
       "tests": "Icon Composer, Dock, Finder and dark/tinted/clear checks",
       "evidence": "LaunchServices FileWrapper error on Apple's own template; asset compiler and GUI environment unresolved",
       "status": "Blocked externally"
+    },
+    {
+      "id": "BG.01",
+      "phase": "follow-up",
+      "requirement": "Recognisable brain assets for app, Dock, widgets and controls",
+      "implementation": "Branding; App/BrandMark.swift",
+      "tier": 1,
+      "tests": "71 PNG checks; ICNS decoding; artwork proof",
+      "evidence": "Evidence/IconVerification.json",
+      "status": "Verified",
+      "scope": "Exported assets; native renderer not verified"
+    },
+    {
+      "id": "BG.02",
+      "phase": "follow-up",
+      "requirement": "Quiet menu-bar launch without a Dock entry or initial window",
+      "implementation": "MemoriaLifecycle; app scenes; LSUIElement",
+      "tier": 1,
+      "tests": "Live App Store preview lifecycle",
+      "evidence": "Evidence/BackgroundVerification.json",
+      "status": "Verified",
+      "scope": "Local App Store preview only"
+    },
+    {
+      "id": "BG.04",
+      "phase": "follow-up",
+      "requirement": "Optional Dock visibility and native login startup",
+      "implementation": "MemoriaLifecycle; Settings",
+      "tier": 1,
+      "tests": "Five policy tests and live settings/Dock checks",
+      "evidence": "Evidence/BackgroundVerification.json",
+      "status": "Implemented",
+      "scope": "Policy and Dock tests verified; permanent login registration/log-in test pending"
+    },
+    {
+      "id": "BG.03",
+      "phase": "follow-up",
+      "requirement": "Continue monitoring after closing the monitor",
+      "implementation": "Persistent menu-bar scene and application delegate",
+      "tier": 1,
+      "tests": "Open/close monitor and observe continued readings",
+      "evidence": "Evidence/BackgroundVerification.json",
+      "status": "Verified",
+      "scope": "Local App Store preview only"
     }
   ]
 }

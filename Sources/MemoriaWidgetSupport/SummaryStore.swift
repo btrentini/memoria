@@ -4,8 +4,8 @@ public enum SummaryStoreError:Error,Sendable {case tooLarge,invalid,notRegularFi
 public enum WidgetGroup {
     public static let suffix=".fyi.trentini.memoria.shared"
     public static func validIdentifier(_ identifier:String) -> Bool {
-        guard identifier.hasSuffix(suffix) else {return false}
-        let team=identifier.dropLast(suffix.count)
+        guard let matched=[suffix,".fyi.trentini.memoria.store.shared"].first(where:identifier.hasSuffix) else {return false}
+        let team=identifier.dropLast(matched.count)
         return team.count==10 && team.allSatisfy {$0.isASCII && ($0.isUppercase || $0.isNumber)}
     }
     public static func directory(bundle:Bundle = .main) -> URL? {

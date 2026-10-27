@@ -16,8 +16,8 @@ subprocess.run([
     "-sdk",str(developer/"Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"),
     "-module-cache-path",os.environ.get("MEMORIA_MODULE_CACHE",str(output/"module-cache")),
     "-warnings-as-errors",str(root/"Scripts/export-icons.swift"),"-o",str(output/"export-icons")
-],check=True)
-subprocess.run([str(output/"export-icons"),str(root)],check=True)
+],check=True,timeout=900)
+subprocess.run([str(output/"export-icons"),str(root)],check=True,timeout=900)
 
 # Optional conventional Xcode asset catalog. Do not add it beside the modern
 # .icon in the same target: Icon Composer supersedes that app icon catalog.

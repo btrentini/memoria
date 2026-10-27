@@ -1,7 +1,10 @@
 import SwiftUI
 import MemoriaCore
+import MemoriaLifecycle
 
 @main struct MemoriaApp:App {
+    @NSApplicationDelegateAdaptor(BackgroundApplicationDelegate.self) private var delegate
+    @State private var lifecycle=BackgroundLifecycle()
     @State private var model=AppModel()
     @AppStorage("appearance") private var appearance="System"
     var body:some Scene {
@@ -13,6 +16,8 @@ import MemoriaCore
                 .onOpenURL {model.handleWidgetURL($0)}
         }
         .defaultSize(width:1320,height:850)
+        .defaultLaunchBehavior(.suppressed)
+        .restorationBehavior(.disabled)
         .commands {
             CommandGroup(after:.newItem) {Button("Quick Task Manager") {model.showQuick()}.keyboardShortcut("k",modifiers:[.command,.shift])}
             CommandMenu("Monitor") {
@@ -24,8 +29,8 @@ import MemoriaCore
                 Button("Force Kill Selected Process…") {model.prepare(.forceKill)}.disabled(model.selectedProcess == nil)
             }
         }
-        MenuBarExtra(isInserted:$model.menuBarVisible) {MenuPopover(model:model)} label:{MenuBarStatusLabel(model:model)}
+        MenuBarExtra {MenuPopover(model:model)} label:{MenuBarStatusLabel(model:model)}
             .menuBarExtraStyle(.window)
-        Settings {SettingsView(model:model).frame(width:610,height:600)}
+        Settings {SettingsView(model:model,lifecycle:lifecycle).frame(width:610,height:600)}
     }
 }

@@ -1,9 +1,11 @@
 import SwiftUI
 import MemoriaServices
+import MemoriaLifecycle
 import MemoriaWidgetSupport
 
 struct SettingsView:View {
     @Bindable var model:AppModel
+    @Bindable var lifecycle:BackgroundLifecycle
     @AppStorage("appearance") private var appearance="System"
     @AppStorage("samplingInterval") private var interval=1.0
     @AppStorage("shortcutEnabled") private var shortcut=true
@@ -17,9 +19,9 @@ struct SettingsView:View {
     @State private var widgetHelp=false
     var body:some View {TabView {
         Form {
+            BackgroundPreferences(lifecycle:lifecycle)
             Section("Appearance") {Picker("Theme",selection:$appearance) {ForEach(["System","Light","Dark"],id:\.self) {Text($0)}};Toggle("Simplified main window",isOn:$model.simplifiedView);Text("Charts, key readings and up to ten processes per tab. Switch to Full for detailed tables and actions.").font(.caption).foregroundStyle(.secondary)}
             Section("Menu bar and widgets") {
-                Toggle("Show Memoria in the menu bar",isOn:$model.menuBarVisible)
                 Picker("Menu-bar readings",selection:$model.menuBarReading) {ForEach(MenuBarReading.allCases,id:\.rawValue) {Text($0.rawValue).tag($0.rawValue)}}
                 Toggle("Share aggregate readings with desktop widgets",isOn:$model.widgetSharing)
                 Text(model.widgetStatus).font(.caption).foregroundStyle(.secondary)

@@ -51,9 +51,7 @@ struct ActionReview:Identifiable {
         let saved=UserDefaults.standard.string(forKey:"simpleProcessMetric."+context.rawValue).flatMap(ProcessSort.init(rawValue:))
         return (context,saved?.isResource == true ? saved! : context.defaultSort)
     })
-    var menuBarVisible=UserDefaults.standard.object(forKey:"menuBarVisible") as? Bool ?? true {
-        didSet {UserDefaults.standard.set(menuBarVisible,forKey:"menuBarVisible")}
-    }
+
     var menuBarReading=UserDefaults.standard.string(forKey:"menuBarReading") ?? MenuBarReading.both.rawValue {
         didSet {UserDefaults.standard.set(menuBarReading,forKey:"menuBarReading")}
     }
@@ -110,6 +108,7 @@ struct ActionReview:Identifiable {
     var cpuText:String {sleeping ? "Paused":Format.percent(snapshot?.systemCPU?.busy)}
     func start() {
         guard monitorTask == nil else {return}
+        configureSampling()
         configureShortcut()
         configureExperimental()
         for (name,value) in [(NSWorkspace.willSleepNotification,true),(NSWorkspace.didWakeNotification,false)] {

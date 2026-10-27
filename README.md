@@ -29,3 +29,7 @@ Recorded results: 55 Swift tests, two Rust tests, native CPU/memory workloads an
 Further documentation: [architecture and formulas](Documentation/Architecture.md), [capabilities](Documentation/Capabilities.md), [dependency audit](Documentation/DependencyAudit.md), [acceptance plan](Documentation/Acceptance.md) and [distribution gates](Documentation/Distribution.md).
 
 Original code is [MIT licensed](LICENSE). Optional third-party code retains its own notices.
+
+A separate [App Store submission template](AppStore/README.md) now includes a sandboxed monitoring target, metadata drafts, privacy manifests and archive/export scripts. It excludes process management and private/privileged collectors. The template and local preview are not a signed App Store submission.
+
+Memoria now opens quietly in the menu bar. Choose **Open Memoria** from the brain status item. Settings includes optional Dock visibility and launch at login; see [background startup](Documentation/Background.md). Updated brain artwork and size/appearance guidance are in [Branding](Branding/README.md).

@@ -70,7 +70,8 @@ try:
             data.decode('utf-8')
         except UnicodeDecodeError:
             if not (path.suffix in {'.png', '.icns'} and path.parts[0] in {'App', 'Branding'}
-                    or path.suffix == '.fst' and path.parts[:2] == ('Worker', 'vendor')):
+                    or path.suffix == '.fst' and path.parts[:2] == ('Worker', 'vendor')
+                    or path.suffix in {'.png', '.jpg', '.jpeg'} and path.parts[:2] == ('AppStore', 'Screenshots')):
                 flag(path, 'Unexpected binary data')
         if path.parts[0] == 'Evidence' and path.suffix == '.json':
             inspect_evidence(path, json.loads(data))

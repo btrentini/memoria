@@ -1,0 +1,1 @@
+cpu,memory,monitor,system,performance,charts,menu bar,widget,network,battery

@@ -39,7 +39,7 @@ struct MemoriaWidgetView:View {
     let entry:MemoriaEntry
     var body:some View {
         VStack(alignment:.leading,spacing:10) {
-            HStack {Label {Text("Memoria")} icon:{Image("BrainTemplate").renderingMode(.template).resizable().scaledToFit().frame(width:18,height:18).accessibilityHidden(true)}.font(.caption.weight(.semibold));Spacer();Text(status).font(.caption2).foregroundStyle(.secondary)}
+            HStack {Label {Text("Memoria")} icon:{BrandMark()}.font(.caption.weight(.semibold));Spacer();Text(status).font(.caption2).foregroundStyle(.secondary)}
             if let summary=entry.summary {
                 if family == .systemMedium {
                     HStack(spacing:20) {

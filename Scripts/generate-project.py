@@ -44,21 +44,26 @@ common = {
 
 specs = [
     ("Memoria", "App", "com.apple.product-type.application", "wrapper.application", "Memoria.app",
-     ["MemoriaCore", "MemoriaCollectors", "MemoriaServices", "MemoriaWidgetSupport"]),
+     ["MemoriaCore", "MemoriaCollectors", "MemoriaServices", "MemoriaWidgetSupport", "MemoriaLifecycle"]),
     ("MemoriaHelper", "Helper", "com.apple.product-type.tool", "compiled.mach-o.executable", "MemoriaHelper", ["MemoriaServices"]),
     ("MemoriaFixture", "Fixtures", "com.apple.product-type.tool", "compiled.mach-o.executable", "MemoriaFixture", []),
     ("MemoriaWidget", "Widget", "com.apple.product-type.app-extension", "wrapper.app-extension", "MemoriaWidget.appex", ["MemoriaWidgetSupport"]),
+    ("MemoriaStore", "StoreApp", "com.apple.product-type.application", "wrapper.application", "MemoriaStore.app", ["MemoriaStoreMetrics", "MemoriaWidgetSupport", "MemoriaLifecycle"]),
+    ("MemoriaStoreWidget", "Widget", "com.apple.product-type.app-extension", "wrapper.app-extension", "MemoriaStoreWidget.appex", ["MemoriaWidgetSupport"]),
     ("MemoriaUITests", "UITests", "com.apple.product-type.bundle.ui-testing", "wrapper.cfbundle", "MemoriaUITests.xctest", []),
 ]
 for name, folder, product_type, file_type, product_name, dependencies in specs:
     files = []
     builds = []
-    for path in sorted((ROOT/folder).glob("*.swift")):
+    paths=sorted((ROOT/folder).glob("*.swift"))
+    if name == "MemoriaStore": paths.append(ROOT/"App/WidgetPublisher.swift")
+    if name in {"MemoriaStore","MemoriaWidget","MemoriaStoreWidget"}: paths.append(ROOT/"App/BrandMark.swift")
+    for path in paths:
         file = add("file:"+str(path.relative_to(ROOT)), isa="PBXFileReference", lastKnownFileType="sourcecode.swift",
-                   path=path.name, sourceTree="<group>")
+                   path=str(path.relative_to(ROOT)), sourceTree="SOURCE_ROOT")
         files.append(file)
-        builds.append(add("build:"+str(path.relative_to(ROOT)), isa="PBXBuildFile", fileRef=file))
-    groups.append(add("group:"+folder, isa="PBXGroup", children=files, path=folder, sourceTree="<group>"))
+        builds.append(add("build:"+name+":"+str(path.relative_to(ROOT)), isa="PBXBuildFile", fileRef=file))
+    groups.append(add("group:"+name, isa="PBXGroup", children=files, path=folder, sourceTree="<group>"))
     sources = add(name+"Sources", isa="PBXSourcesBuildPhase", buildActionMask=2147483647, files=builds,
                   runOnlyForDeploymentPostprocessing=0)
     package_products = []
@@ -76,11 +81,21 @@ for name, folder, product_type, file_type, product_name, dependencies in specs:
     settings.update(PRODUCT_NAME=name, PRODUCT_BUNDLE_IDENTIFIER={
         "Memoria":"fyi.trentini.memoria", "MemoriaHelper":"fyi.trentini.memoria.helper",
         "MemoriaFixture":"fyi.trentini.memoria.fixture", "MemoriaUITests":"fyi.trentini.memoria.uitests",
-        "MemoriaWidget":"fyi.trentini.memoria.widget"
+        "MemoriaWidget":"fyi.trentini.memoria.widget",
+        "MemoriaStore":"fyi.trentini.memoria.store", "MemoriaStoreWidget":"fyi.trentini.memoria.store.widget"
     }[name])
     settings["INFOPLIST_KEY_MemoriaSigningTeam"] = "$(DEVELOPMENT_TEAM)"
     settings["LD_RUNPATH_SEARCH_PATHS"] = ["$(inherited)", "@executable_path/../Frameworks"]
-    if name == "Memoria":
+    if name in {"MemoriaStore","MemoriaStoreWidget"}:
+        is_widget=name=="MemoriaStoreWidget"
+        kind="Widget" if is_widget else "App"
+        settings.update(GENERATE_INFOPLIST_FILE="NO",INFOPLIST_FILE=f"AppStore/{kind}-Info.plist",CODE_SIGN_ENTITLEMENTS=f"AppStore/{kind}.entitlements",ENABLE_APP_SANDBOX="YES",MARKETING_VERSION="1.0.0",CURRENT_PROJECT_VERSION="1",SKIP_INSTALL="YES" if is_widget else "NO")
+        settings.pop("INFOPLIST_KEY_MemoriaSigningTeam",None)
+        if is_widget:
+            settings["APPLICATION_EXTENSION_API_ONLY"]="YES"
+            settings["LD_RUNPATH_SEARCH_PATHS"]=["$(inherited)","@executable_path/../Frameworks","@executable_path/../../../../Frameworks"]
+        else: settings["ASSETCATALOG_COMPILER_APPICON_NAME"]="AppIcon"
+    elif name == "Memoria":
         settings.update(ASSETCATALOG_COMPILER_APPICON_NAME="Memoria",GENERATE_INFOPLIST_FILE="NO",INFOPLIST_FILE="Configuration/Memoria-Info.plist",CODE_SIGN_ENTITLEMENTS="Configuration/Memoria.entitlements",INFOPLIST_KEY_LSApplicationCategoryType="public.app-category.utilities",
                         INFOPLIST_KEY_NSPrincipalClass="NSApplication",
                         INFOPLIST_KEY_NSHumanReadableCopyright="Copyright © 2026 Bruno Trentini")
@@ -104,12 +119,32 @@ for name, folder, product_type, file_type, product_name, dependencies in specs:
 # Icon Composer supplies the modern app icon. Template PNGs are shared by the
 # app and widget; only the app compiles the icon document.
 icon_ref=add("BrandIcon",isa="PBXFileReference",lastKnownFileType="folder.iconcomposer.icon",path="Branding/Memoria.icon",sourceTree="<group>")
-template_refs=[add("BrandTemplate"+name,isa="PBXFileReference",lastKnownFileType="image.png",path="App/Resources/"+name,sourceTree="<group>") for name in ["BrainTemplate.png","BrainTemplate@2x.png","BrainMark.png","BrainMark@2x.png"]]
+template_refs=[add("BrandTemplate"+name,isa="PBXFileReference",lastKnownFileType="image.png",path="App/Resources/"+name,sourceTree="<group>") for name in sorted(p.name for p in (ROOT/"App/Resources").glob("*.png"))]
 groups.append(add("BrandAssetsGroup",isa="PBXGroup",children=[icon_ref,*template_refs],name="Brand assets",sourceTree="<group>"))
 for name in ["Memoria","MemoriaWidget"]:
     files=[add(name+"BrandResource"+ref,isa="PBXBuildFile",fileRef=ref) for ref in template_refs+([icon_ref] if name=="Memoria" else [])]
     phase=add(name+"Resources",isa="PBXResourcesBuildPhase",buildActionMask=2147483647,files=files,runOnlyForDeploymentPostprocessing=0)
     objects[target_ids[name]]["buildPhases"].append(phase)
+
+# Store targets share only the aggregate widget model and public collectors.
+store_icon=add("StoreIcon",isa="PBXFileReference",lastKnownFileType="folder.assetcatalog",path="Branding/LegacyAssets.xcassets",sourceTree="<group>")
+store_assets=[store_icon]
+for name,kind in [("MemoriaStore","App"),("MemoriaStoreWidget","Widget")]:
+    privacy=add(name+"Privacy",isa="PBXFileReference",lastKnownFileType="text.xml",path=f"AppStore/{kind}-PrivacyInfo.xcprivacy",sourceTree="<group>")
+    # Privacy manifests must be named PrivacyInfo.xcprivacy inside each bundle.
+    # Both source directories below contain the canonical filename.
+    objects[privacy]["path"]=f"AppStore/{kind}Resources/PrivacyInfo.xcprivacy"
+    store_assets.append(privacy)
+    files=[add(name+"Resource"+ref,isa="PBXBuildFile",fileRef=ref) for ref in [*template_refs,privacy]+([store_icon] if kind=="App" else [])]
+    phase=add(name+"Resources",isa="PBXResourcesBuildPhase",buildActionMask=2147483647,files=files,runOnlyForDeploymentPostprocessing=0)
+    objects[target_ids[name]]["buildPhases"].append(phase)
+groups.append(add("StoreResources",isa="PBXGroup",children=store_assets,name="App Store resources",sourceTree="<group>"))
+store_proxy=add("StoreWidgetProxy",isa="PBXContainerItemProxy",containerPortal=oid("Project"),proxyType=1,remoteGlobalIDString=target_ids["MemoriaStoreWidget"],remoteInfo="MemoriaStoreWidget")
+store_dep=add("StoreWidgetDependency",isa="PBXTargetDependency",target=target_ids["MemoriaStoreWidget"],targetProxy=store_proxy)
+objects[target_ids["MemoriaStore"]]["dependencies"]=[store_dep]
+store_widget=add("StoreWidgetEmbedFile",isa="PBXBuildFile",fileRef=oid("MemoriaStoreWidgetProduct"),settings={"ATTRIBUTES":["CodeSignOnCopy","RemoveHeadersOnCopy"]})
+store_embed=add("StoreWidgetEmbed",isa="PBXCopyFilesBuildPhase",buildActionMask=2147483647,dstPath="",dstSubfolderSpec=13,files=[store_widget],name="Embed Store Widgets",runOnlyForDeploymentPostprocessing=0)
+objects[target_ids["MemoriaStore"]]["buildPhases"].append(store_embed)
 
 # Bundle the optional helper, but do not register or run it on application launch.
 proxy = add("HelperProxy", isa="PBXContainerItemProxy", containerPortal=oid("Project"), proxyType=1,
@@ -169,12 +204,12 @@ project_dir.mkdir(exist_ok=True)
 
 schemes = project_dir/"xcshareddata/xcschemes"
 schemes.mkdir(parents=True,exist_ok=True)
-for name in ("Memoria","MemoriaHelper","MemoriaFixture"):
+for name in ("Memoria","MemoriaHelper","MemoriaFixture","MemoriaStore"):
     scheme = ET.Element("Scheme", LastUpgradeVersion="2710", version="1.7")
     action = ET.SubElement(scheme,"BuildAction",parallelizeBuildables="YES",buildImplicitDependencies="YES")
     entries = ET.SubElement(action,"BuildActionEntries")
     entry = ET.SubElement(entries,"BuildActionEntry",buildForTesting="YES",buildForRunning="YES",buildForProfiling="YES",buildForArchiving="YES",buildForAnalyzing="YES")
-    attrs = dict(BuildableIdentifier="primary",BlueprintIdentifier=target_ids[name],BuildableName=name+".app" if name == "Memoria" else name,BlueprintName=name,ReferencedContainer="container:Memoria.xcodeproj")
+    attrs = dict(BuildableIdentifier="primary",BlueprintIdentifier=target_ids[name],BuildableName=name+".app" if name in {"Memoria","MemoriaStore"} else name,BlueprintName=name,ReferencedContainer="container:Memoria.xcodeproj")
     ET.SubElement(entry,"BuildableReference",**attrs)
     test = ET.SubElement(scheme,"TestAction",buildConfiguration="Debug",selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB",selectedLauncherIdentifier="Xcode.IDEFoundation.Launcher.LLDB",shouldUseLaunchSchemeArgsEnv="YES")
     if name == "Memoria":

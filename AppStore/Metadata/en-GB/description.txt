@@ -1,0 +1,11 @@
+Memoria gives you a clear view of your Mac’s system resources, in a native interface that stays close at hand.
+
+Follow whole-machine CPU activity and memory accounting with up to one hour of charts. See interface traffic separately, check battery information when available, and read the thermal and memory-pressure signals reported by macOS. Simple view keeps the main readings and charts together; detailed views explain the underlying components.
+
+The menu-bar monitor shows CPU and memory at a glance. Memoria runs quietly without a Dock icon by default. Open the dashboard from its brain menu, choose an optional Dock icon in Settings, or enable launch at login after installation. Optional small and medium desktop widgets show a timestamped snapshot. Keep Memoria running for new readings; macOS controls widget refresh timing.
+
+Memoria processes readings locally. There are no accounts, advertisements, analytics or remote telemetry. Chart history is held in memory. Widget sharing is off by default and can be disabled in Settings, which deletes the local snapshot.
+
+This App Store edition provides system monitoring. It does not provide per-process resource lists, process termination, Free Port, administrator tools, GPU or private temperature sensors. Availability of individual system readings depends on your Mac and macOS permissions; missing readings are shown explicitly.
+
+Requires an Apple Silicon Mac running macOS 26 or later.

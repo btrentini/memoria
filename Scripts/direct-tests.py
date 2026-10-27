@@ -10,8 +10,8 @@ toolchain=developer/"Toolchains/XcodeDefault.xctoolchain/usr/bin"
 sdk=developer/"Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
 frameworks=developer/"Platforms/MacOSX.platform/Developer/Library/Frameworks"
 build=Path(os.environ.get("MEMORIA_BUILD_DIR",str(root/"build/direct"))).resolve()
-command=[str(toolchain/"swiftc"),"-swift-version","6","-target","arm64-apple-macosx26.0",
-         "-sdk",str(sdk),"-module-cache-path",str(build/"module-cache"),
+command=[str(toolchain/"swiftc"),"-whole-module-optimization","-swift-version","6","-target","arm64-apple-macosx26.0",
+         "-sdk",str(sdk),"-module-cache-path",os.environ.get("MEMORIA_MODULE_CACHE",str(build/"module-cache")),
          "-I",str(build),"-I",str(root/"Sources/MemoriaNative/include"),"-L",str(build),
          "-F",str(frameworks),"-framework","Testing","-lMemoriaCore","-lMemoriaCollectors","-lMemoriaServices","-lMemoriaWidgetSupport",
          "-parse-as-library","-strict-concurrency=complete","-warnings-as-errors",

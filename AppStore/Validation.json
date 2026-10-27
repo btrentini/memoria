@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "date": "2026-10-27",
+  "purpose": "Future App Store submission template requested without a developer account",
+  "readyForAppStoreUpload": false,
+  "uploadedToApple": false,
+  "proposedVersion": "1.0.0",
+  "proposedBuild": "1",
+  "sourceEdition": "Separate sandboxed monitoring target; direct edition retained",
+  "checks": {
+    "sdkBuild": "Optimised ARM64 Swift 6/C build passed with strict concurrency and warnings-as-errors for first-party code",
+    "linking": "First-party modules linked statically; no helper, worker, direct-edition libraries or custom dylib dependency in preview",
+    "localSignatures": "App and widget ad-hoc signature integrity passed with App Sandbox and Hardened Runtime",
+    "storeUnitTests": {
+      "passed": 10,
+      "suites": 2,
+      "scope": "Five monitoring and five background/login policy tests"
+    },
+    "existingSwiftRegressionTests": {
+      "passed": 55,
+      "suites": 11,
+      "scope": "Re-run after background and icon changes"
+    },
+    "bundleBoundaryChecks": "40 checks passed; source graph, imports, entitlements, privacy manifests, metadata and menu-bar agent flag",
+    "unsignedSubmissionGuard": "Distribution audit rejects the local preview; archive command rejects absent Team ID",
+    "xcodeProjectAndPlists": "plutil syntax checks passed; native Xcode build not verified",
+    "localLaunch": "Sandboxed ad-hoc preview launched after static linking; native application window observed. Full signed acceptance remains outstanding.",
+    "visualPreview": "Actual 1280 \u00d7 800 RGB JPEG window capture inspected; live CPU chart, memory accounting, thermal state and availability labels visible; no process identities, personal paths or unrelated windows.",
+    "backgroundLifecycle": "Live preview: no initial window; menu opens monitor; closing monitor keeps readings active; Dock preference toggles and restores accessory mode; temporary login registration disabled",
+    "icons": "Revised brain artwork; 71 PNG exports checked, three ICNS files with ten representations each, simplified alpha templates at 16/18/24/32 pt and both scales",
+    "resourceIntegrity": "Final preview and widget template bytes match the exported assets; CFBundleIconFile matches the default ICNS and no stale asset-catalog name is set in the SDK-only preview."
+  },
+  "externalGates": [
+    "No Apple Developer team or signing identities configured",
+    "No App Store provisioning profiles or App Group delivery validation",
+    "Xcode project/archive launcher cannot load missing CoreSimulator.framework",
+    "Full functional, workload, accessibility and appearance acceptance incomplete",
+    "Real signed-app screenshots pending",
+    "Public privacy/support pages not hosted and URLs unset",
+    "App Store Connect app record, contact, pricing/territories and questionnaires pending",
+    "No signed Xcode archive, installer export or App Review validation",
+    "Permanent installation and actual sign-in startup/removal test"
+  ],
+  "diagnostics": "Some compiler invocations emitted sandbox_apply diagnostics while returning success; these are not runtime sandbox acceptance. Raw logs and runtime captures are kept outside the publication source."
+}

@@ -274,3 +274,12 @@ Status: Not started → Implemented → Verified, or Blocked externally / Unavai
 | P9.16 | Assess reduced App Store edition | Documentation/Distribution.md | 1 | Distribution assessment | No App Store eligibility claim | Implemented |
 | P9.17 | Verify signed widget gallery and shared App Group delivery | Documentation/Widgets.md; Configuration | 1 | Signed widget installation and lifecycle | No configured signing identity; GUI launch unresolved | Blocked externally |
 | P9.18 | Verify native icon rendering and system appearance selection | Branding/README.md; Evidence/README.md | 1 | Icon Composer, Dock, Finder and dark/tinted/clear checks | LaunchServices FileWrapper error on Apple's own template; asset compiler and GUI environment unresolved | Blocked externally |
+
+## Brain icon and background follow-up
+
+| ID | Requirement | Implementation | Tier | Tests | Evidence | Status |
+|---|---|---|---|---|---|---|
+| BG.01 | Recognisable brain artwork across app, Dock, widget and menus | Branding masters, Icon Composer source, ICNS, catalog and alpha templates | 1 | 71 PNG checks; 10 representations per ICNS; visual proof | Evidence/IconVerification.json | Verified for exported assets; native renderer remains gated |
+| BG.02 | Run without a Dock icon or initial monitor window | LSUIElement; shared accessory lifecycle; suppressed launch scene | 1 | App Store live launch and menu/window lifecycle | Evidence/BackgroundVerification.json | Verified in local App Store preview; direct UI pending |
+| BG.03 | Continue monitoring after closing the window | Application delegate and persistent menu-bar scene | 1 | Open/close monitor and observe continued menu readings | Evidence/BackgroundVerification.json | Verified in local App Store preview |
+| BG.04 | Optional native login startup and Dock visibility | MemoriaLifecycle; mainApp registration; preferences and revocation states | 1 | Five lifecycle policy tests; settings UI check | Evidence/BackgroundVerification.json | Implemented; policy tests verified; permanent installation/login test blocked externally |

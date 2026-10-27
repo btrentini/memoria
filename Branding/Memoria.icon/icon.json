@@ -5,7 +5,7 @@
   "fill-specializations": [
     {
       "appearance": "dark",
-      "value": {"solid": "extended-srgb:0.06275,0.09020,0.17255,1.00000"}
+      "value": {"solid": "extended-srgb:0.06275,0.10588,0.20000,1.00000"}
     },
     {
       "appearance": "tinted",
@@ -23,7 +23,7 @@
           "fill-specializations": [
             {
               "appearance": "dark",
-              "value": {"automatic-gradient": "extended-srgb:0.53725,0.72157,1.00000,1.00000"}
+              "value": {"automatic-gradient": "extended-srgb:0.66275,0.78824,1.00000,1.00000"}
             },
             {
               "appearance": "tinted",

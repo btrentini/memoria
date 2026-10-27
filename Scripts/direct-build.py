@@ -13,12 +13,12 @@ output = Path(os.environ.get("MEMORIA_BUILD_DIR",str(root/"build/direct"))).reso
 output.mkdir(parents=True, exist_ok=True)
 log = output/"build.log"
 swift = toolchain/"swiftc"
-flags = ["-swift-version","6","-target","arm64-apple-macosx26.0","-sdk",str(sdk),
+flags = ["-whole-module-optimization","-swift-version","6","-target","arm64-apple-macosx26.0","-sdk",str(sdk),
          "-module-cache-path",str(Path(os.environ.get("MEMORIA_MODULE_CACHE", str(output/"module-cache")))),"-I",str(output),
          "-I",str(root/"Sources/MemoriaNative/include"),"-L",str(output),
          "-strict-concurrency=complete","-warnings-as-errors"]
 if os.environ.get("MEMORIA_CONFIGURATION") == "Release":
-    flags += ["-O","-whole-module-optimization"]
+    flags += ["-O"]
 # Compiler subprocesses still inherit the session's filesystem sandbox. This
 # opt-in avoids nesting Apple's macro sandbox inside an existing sandbox.
 if os.environ.get("MEMORIA_NESTED_SANDBOX") == "1":
@@ -42,6 +42,7 @@ if not resume:
     run([toolchain/"ar","rcs",output/"libMemoriaNative.a",output/"native.o"])
 for module, libraries in [
     ("MemoriaCore",[]),
+    ("MemoriaLifecycle",["-framework","ServiceManagement"]),
     ("MemoriaWidgetSupport",["-application-extension"]),
     ("MemoriaCollectors",["-lMemoriaCore","-lMemoriaNative","-framework","IOKit"]),
     ("MemoriaServices",["-lMemoriaCore","-lMemoriaCollectors","-lMemoriaNative","-framework","Security","-framework","ServiceManagement"])
@@ -57,12 +58,12 @@ for name,folder,links,parse in [
     ("MemoriaFixture","Fixtures",[],[]),
     ("MemoriaProbe","Probe",["-lMemoriaCore","-lMemoriaCollectors","-lMemoriaServices"],["-parse-as-library"]),
     ("MemoriaHelper","Helper",["-lMemoriaCore","-lMemoriaCollectors","-lMemoriaServices"],[]),
-    ("Memoria","App",["-lMemoriaCore","-lMemoriaCollectors","-lMemoriaServices","-lMemoriaWidgetSupport"],["-parse-as-library"]),
+    ("Memoria","App",["-lMemoriaCore","-lMemoriaCollectors","-lMemoriaServices","-lMemoriaWidgetSupport","-lMemoriaLifecycle"],["-parse-as-library"]),
     ("MemoriaWidget","Widget",["-lMemoriaWidgetSupport","-application-extension","-Xlinker","-rpath","-Xlinker","@executable_path/../Frameworks"],["-parse-as-library"])
 ]:
     if skipping and name != resume:
         continue
     skipping = False
     run([swift,*flags,*parse,"-module-name",name,"-Xlinker","-rpath","-Xlinker","@executable_path",
-         *links,*sorted((root/folder).glob("*.swift")),"-o",output/name])
+         *links,*([root/"App/BrandMark.swift"] if folder=="Widget" else []),*sorted((root/folder).glob("*.swift")),"-o",output/name])
 print(f"Development executables built in {output}. No signing or distribution verification is implied.")

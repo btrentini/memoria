@@ -1,6 +1,5 @@
 import Foundation
 import WidgetKit
-import MemoriaCore
 import MemoriaWidgetSupport
 
 actor WidgetPublisher {

@@ -54,25 +54,26 @@ try png(mark,output.appendingPathComponent("Logo-Cobalt-1024.png"))
 
 // Locate the visible glyph for a dedicated menu-bar export. Do not shrink the
 // app icon's padded enclosure into the status item. Colours come from the OS.
-let analysis=try context(mark.width,mark.height)
-analysis.draw(mark,in:CGRect(x:0,y:0,width:mark.width,height:mark.height))
+let menu=try resized(read("Brain-Menu-Original.png"),1024)
+let analysis=try context(menu.width,menu.height)
+analysis.draw(menu,in:CGRect(x:0,y:0,width:menu.width,height:menu.height))
 let bytes=analysis.data!.assumingMemoryBound(to:UInt8.self)
-var minX=mark.width,minY=mark.height,maxX=0,maxY=0
-for y in 0..<mark.height {for x in 0..<mark.width where bytes[(y*mark.width+x)*4+3]>=128 {
+var minX=menu.width,minY=menu.height,maxX=0,maxY=0
+for y in 0..<menu.height {for x in 0..<menu.width where bytes[(y*menu.width+x)*4+3]>=128 {
     minX=min(minX,x);minY=min(minY,y);maxX=max(maxX,x);maxY=max(maxY,y)
 }}
 guard maxX>minX,maxY>minY else {throw ExportError.image("Empty foreground")}
-let bounds=CGRect(x:minX,y:mark.height-maxY-1,width:maxX-minX+1,height:maxY-minY+1)
+let bounds=CGRect(x:minX,y:menu.height-maxY-1,width:maxX-minX+1,height:maxY-minY+1)
 func template(_ size:Int) throws -> CGImage {
     let ctx=try context(size,size)
     let available=Double(size)*8/9,scale=min(available/bounds.width,available/bounds.height)
     let x=(Double(size)-bounds.width*scale)/2-bounds.minX*scale
     let y=(Double(size)-bounds.height*scale)/2-bounds.minY*scale
-    ctx.draw(mark,in:CGRect(x:x,y:y,width:Double(mark.width)*scale,height:Double(mark.height)*scale))
+    ctx.draw(menu,in:CGRect(x:x,y:y,width:Double(menu.width)*scale,height:Double(menu.height)*scale))
     ctx.setBlendMode(.sourceIn);ctx.setFillColor(CGColor(gray:0,alpha:1));ctx.fill(CGRect(x:0,y:0,width:size,height:size))
     return ctx.makeImage()!
 }
-for (size,name) in [(18,"BrainTemplate.png"),(36,"BrainTemplate@2x.png"),(32,"BrainMark.png"),(64,"BrainMark@2x.png")] {
+for (size,name) in [(16,"BrainTemplate16.png"),(32,"BrainTemplate16@2x.png"),(18,"BrainTemplate.png"),(36,"BrainTemplate@2x.png"),(24,"BrainTemplate24.png"),(48,"BrainTemplate24@2x.png"),(32,"BrainMark.png"),(64,"BrainMark@2x.png")] {
     let image=try template(size)
     let dpi=Double(name.contains("@2x") ? 144:72)
     try png(image,root.appendingPathComponent("App/Resources/"+name),dpi:dpi)
@@ -149,6 +150,6 @@ for (x,isDark) in [(180.0,false),(390.0,true)] {
 }
 text("Artwork proof · native Icon Composer rendering still requires environment verification.",64,54,14,CGColor(gray:0.45,alpha:1))
 try png(sheet.makeImage()!,brand.appendingPathComponent("Preview.png"))
-let data=try JSONSerialization.data(withJSONObject:["schema":1,"exports":manifest,"menuBarPoints":18,"menuBarScales":[1,2],"nativeSource":"Branding/Memoria.icon","nativeRenderingVerified":false],options:[.prettyPrinted,.sortedKeys])
+let data=try JSONSerialization.data(withJSONObject:["schema":1,"exports":manifest,"menuBarPoints":18,"templatePoints":[16,18,24,32],"menuBarScales":[1,2],"nativeSource":"Branding/Memoria.icon","nativeRenderingVerified":false],options:[.prettyPrinted,.sortedKeys])
 try data.write(to:output.appendingPathComponent("Manifest.json"),options:.atomic)
-print("Exported default, dark and monochrome PNG/iconset/icns assets, 18pt menu templates and Branding/Preview.png.")
+print("Exported default, dark and monochrome PNG/iconset/icns assets, 16/18/24/32pt templates and Branding/Preview.png.")

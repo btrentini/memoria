@@ -15,7 +15,7 @@ if app.exists():
     shutil.rmtree(app)
 binary=app/"Contents/MacOS"
 binary.mkdir(parents=True,exist_ok=True)
-for name in ["Memoria","MemoriaHelper","libMemoriaCore.dylib","libMemoriaCollectors.dylib","libMemoriaServices.dylib","libMemoriaWidgetSupport.dylib"]:
+for name in ["Memoria","MemoriaHelper","libMemoriaCore.dylib","libMemoriaCollectors.dylib","libMemoriaServices.dylib","libMemoriaWidgetSupport.dylib","libMemoriaLifecycle.dylib"]:
     shutil.copy2(source/name,binary/name)
 def info(filename, executable, identifier):
     data=plistlib.loads((root/"Configuration"/filename).read_bytes())
@@ -40,7 +40,7 @@ plist.pop("CFBundleIconName",None)
 resources=app/"Contents/Resources"
 resources.mkdir(parents=True,exist_ok=True)
 shutil.copy2(root/"Branding/Exports/Memoria-Default.icns",resources/"Memoria.icns")
-for name in ["BrainTemplate.png","BrainTemplate@2x.png","BrainMark.png","BrainMark@2x.png"]:
+for name in sorted(p.name for p in (root/"App/Resources").glob("*.png")):
     shutil.copy2(root/"App/Resources"/name,resources/name)
 launch=app/"Contents/Library/LaunchDaemons"
 launch.mkdir(parents=True,exist_ok=True)
@@ -54,7 +54,7 @@ shutil.copy2(source/"libMemoriaWidgetSupport.dylib",widget_frameworks)
 (widget/"Contents/Info.plist").write_bytes(plistlib.dumps(info("MemoriaWidget-Info.plist","MemoriaWidget","fyi.trentini.memoria.widget")))
 widget_resources=widget/"Contents/Resources"
 widget_resources.mkdir(parents=True,exist_ok=True)
-for name in ["BrainTemplate.png","BrainTemplate@2x.png","BrainMark.png","BrainMark@2x.png"]:
+for name in sorted(p.name for p in (root/"App/Resources").glob("*.png")):
     shutil.copy2(root/"App/Resources"/name,widget_resources/name)
 widget_entitlements=root/"build/widget-development.entitlements"
 widget_entitlements.write_bytes(plistlib.dumps({"com.apple.security.app-sandbox":True}))
@@ -63,7 +63,7 @@ subprocess.run(["/usr/bin/codesign","--force","--sign","-","--timestamp=none","-
 subprocess.run(["/usr/bin/codesign","--verify","--strict",str(widget)],check=True)
 # The linker's ad-hoc executable signature predates Info.plist. Re-sign the
 # assembled bundle locally so its resources are consistent; no identity is used.
-for name in ["libMemoriaCore.dylib","libMemoriaCollectors.dylib","libMemoriaServices.dylib","libMemoriaWidgetSupport.dylib","MemoriaHelper"]:
+for name in ["libMemoriaCore.dylib","libMemoriaCollectors.dylib","libMemoriaServices.dylib","libMemoriaWidgetSupport.dylib","libMemoriaLifecycle.dylib","MemoriaHelper"]:
     subprocess.run(["/usr/bin/codesign","--force","--sign","-","--timestamp=none",str(binary/name)],check=True)
 subprocess.run(["/usr/bin/codesign","--force","--sign","-","--timestamp=none","--identifier","fyi.trentini.memoria",str(app)],check=True)
 subprocess.run(["/usr/bin/codesign","--verify","--strict",str(app)],check=True)

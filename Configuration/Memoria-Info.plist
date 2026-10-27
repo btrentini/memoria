@@ -35,6 +35,8 @@
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>26.0</string>
+	<key>LSUIElement</key>
+	<true/>
 	<key>MemoriaAppGroup</key>
 	<string>$(TeamIdentifierPrefix)fyi.trentini.memoria.shared</string>
 	<key>MemoriaSigningTeam</key>

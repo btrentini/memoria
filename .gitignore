@@ -48,3 +48,4 @@ Evidence/*
 !Evidence/osv-query.json
 !Evidence/osv-response.json
 !Evidence/PublicationChecks.json
+!Evidence/BackgroundVerification.json
