@@ -28,6 +28,7 @@ struct ActionReview:Identifiable {
     let treeRoot:ProcessIdentity?
     var administrator=false
     var parents:[ProcessIdentity:Int32]=[:]
+    var application:ApplicationActionPlan?
 }
 @MainActor @Observable final class AppModel {
     let telemetry=TelemetryCoordinator(),ports=PortCollector(),actions=ProcessActionCoordinator()
@@ -37,7 +38,12 @@ struct ActionReview:Identifiable {
     var update:TelemetryUpdate?
     var capabilities:[Capability]=[]
     var destination:Destination = Destination(rawValue:UserDefaults.standard.string(forKey:"destination") ?? "") ?? .overview {
-        didSet {UserDefaults.standard.set(destination.rawValue,forKey:"destination");configureExperimental()}
+        didSet {
+            UserDefaults.standard.set(destination.rawValue,forKey:"destination");configureExperimental()
+            if destination == .applications, oldValue != .applications {
+                Task {await refreshApplications(forceMemory:true)}
+            }
+        }
     }
     var processListPreferences: [ProcessListContext:ProcessListPreferences] = Dictionary(uniqueKeysWithValues:ProcessListContext.allCases.map { context in
         let saved=UserDefaults.standard.data(forKey:"processRanking."+context.rawValue)
@@ -64,6 +70,11 @@ struct ActionReview:Identifiable {
     @ObservationIgnored private let widgetPublisher=WidgetPublisher()
     var selected:ProcessIdentity?
     var groups:[ApplicationGroup]=[]
+    var applicationMemory=ApplicationMemorySnapshot()
+    var applicationProcesses:[ProcessSnapshot]=[]
+    var applicationSampleTime:Double?
+    var expandedApplications:Set<String>=[]
+    @ObservationIgnored private var applicationRevision=0
     var histories:[String:BoundedHistory]=[:]
     var processHistories:[ProcessIdentity:[String:BoundedHistory]]=[:]
     var pinned:Set<ProcessIdentity>=[]
@@ -116,7 +127,11 @@ struct ActionReview:Identifiable {
                 guard let self else {return};self.sleeping=value
                 let now=ProcessInfo.processInfo.systemUptime
                 for key in self.histories.keys {self.histories[key]?.append(HistoryPoint(date:.now,monotonic:now,value:nil))}
-                if value {self.update=nil;self.scan=nil;self.review=nil;self.operationTask?.cancel();self.publishWidget(force:true)}
+                if value {
+                    self.update=nil;self.scan=nil;self.review=nil;self.operationTask?.cancel();self.publishWidget(force:true)
+                    self.applicationRevision += 1;self.applicationMemory=ApplicationMemorySnapshot()
+                    self.applicationProcesses=[];self.groups=[];self.applicationSampleTime=nil
+                }
                 await self.telemetry.setSleeping(value)
                 if value {self.experimentalRequested=false;self.workerTask?.cancel();await self.experimental.stop();self.experimentalStatus="Paused for sleep";self.experimentalSamples=[:]}
                 else {self.configureExperimental()}
@@ -136,11 +151,31 @@ struct ActionReview:Identifiable {
                 }
                 // Interface churn cannot grow the history dictionary indefinitely.
                 if self.histories.count > 128 {let live=Set(next.metrics.map(\.id));self.histories=self.histories.filter {live.contains($0.key)}}
-                self.groups=(try? await self.executor.run {ApplicationGrouping.group(next.snapshot.processes)}) ?? []
+                if self.destination == .applications {await self.refreshApplications()}
                 self.recordProcessHistory(next.snapshot)
                 self.handleAlerts(next);self.record(next.metrics);self.publishWidget()
             }
         }
+    }
+    func refreshApplications(forceMemory:Bool=false) async {
+        guard destination == .applications,let snapshot,!sleeping else {return}
+        applicationRevision += 1
+        let revision=applicationRevision
+        applicationMemory.refresh(processes:snapshot.processes,systemAccounted:snapshot.memory?.accounted,
+                                  monotonic:snapshot.monotonic,date:snapshot.date,force:forceMemory)
+        applicationProcesses=applicationMemory.applying(to:snapshot.processes)
+        applicationSampleTime=snapshot.monotonic
+        let input=applicationProcesses
+        let next=(try? await executor.run {ApplicationGrouping.group(input)}) ?? []
+        guard revision == applicationRevision,!sleeping else {return}
+        groups=next
+        expandedApplications.formIntersection(Set(next.map(\.id)))
+    }
+    func displayedProcesses(for context:ProcessListContext) -> [ProcessSnapshot] {
+        context == .applications ? applicationProcesses:snapshot?.processes ?? []
+    }
+    var inspectedProcess:ProcessSnapshot? {
+        destination == .applications ? applicationProcesses.first {$0.identity == selected}:selectedProcess
     }
     func configureSampling() {
         let visible=NSApp.windows.contains {$0.isVisible && !$0.isMiniaturized && ["Memoria","Quick Task Manager"].contains($0.title)}
@@ -206,6 +241,26 @@ struct ActionReview:Identifiable {
         item.parents=Dictionary(members.map {($0.identity,$0.parentPID)},uniquingKeysWith:{a,_ in a})
         review=item
     }
+    func prepareApplicationProcess(_ process:ProcessSnapshot,action:TerminationAction = .terminate) {
+        guard !operationRunning else {return}
+        guard let live=snapshot?.processes.first(where:{$0.identity == process.identity}),live.executable == process.executable else {
+            reviewPresenter="main";resultMessage="This process exited or changed executable. Select it again from the current list.";return
+        }
+        selected=live.identity;prepare(action)
+    }
+    func prepareApplication(_ bundlePath:String,action:TerminationAction = .terminate) {
+        guard !operationRunning else {return}
+        reviewPresenter="main"
+        guard let group=ApplicationGrouping.group(snapshot?.processes ?? []).first(where:{$0.bundlePath == bundlePath}) else {
+            resultMessage="This application is no longer visible. No termination request was sent.";return
+        }
+        let plan=ApplicationActionPlan(group:group)
+        guard !plan.targets.isEmpty,plan.targets.count <= 256 else {
+            resultMessage="The application has no verifiable targets or exceeds the 256-process action limit. Review individual processes instead.";return
+        }
+        var item=ActionReview(targets:plan.targets,action:action,query:nil,endpoints:[],treeRoot:nil)
+        item.application=plan;review=item
+    }
     func prepareFreePort(_ endpoint:EndpointRecord,action:TerminationAction = .terminate) {
         reviewPresenter="main"
         guard let process=snapshot?.processes.first(where:{$0.identity == endpoint.process}),let target=TerminationTarget(process:process),let query=try? PortQuery("\(endpoint.localPort)/\(endpoint.transport.rawValue)") else {resultMessage="Refresh process and port snapshots before selecting this listener.";return}
@@ -233,6 +288,19 @@ struct ActionReview:Identifiable {
                 resultMessage="\(result.remaining.isEmpty ? "No matching listener visible after rescan.":"\(result.remaining.count) matching listener(s) remain.") \(result.replacements.count) replacement listener(s). \(result.scan.coverage)\n"
             } else {results=await actions.perform(request);resultMessage=""}
             resultMessage += results.map {"\($0.target.name) (\($0.target.identity.pid)): \($0.message)"}.joined(separator:"\n")
+            if let application=review.application {
+                let reader=NativeReader()
+                do {
+                    let remaining=try await executor.run {
+                        ApplicationGrouping.group(try reader.pids().compactMap {try? reader.process($0)})
+                            .first {$0.bundlePath == application.group.bundlePath}
+                    }
+                    let members=remaining?.members ?? []
+                    let reviewed=Set(review.targets.map(\.identity))
+                    let added=members.filter {!reviewed.contains($0.process.identity)}.count
+                    resultMessage += "\n\(members.count) associated processes remain visible; \(added) are new and were not targeted. \(application.unavailable.count) unverifiable processes were excluded from the review. Visibility may be incomplete. Remaining or replacement processes require a fresh review."
+                } catch {resultMessage += "\nApplication rescan failed; complete closure could not be verified."}
+            }
             if let root=review.treeRoot {
                 let reader=NativeReader()
                 if let live=try? await executor.run({try reader.pids().compactMap {try? reader.process($0)}}) {

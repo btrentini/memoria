@@ -35,3 +35,13 @@ See the [requirements ledger](Requirements.md) and [known issues](KnownIssues.md
 Raw process/socket captures, captured PIDs, personal workspace paths, machine identifiers, credentials, signing material, build products and runtime recordings are excluded. PID-handling source and synthetic identity tests remain necessary parts of the process manager. Source and dependency scanning found no confirmed credentials; Cargo checksum matches were reviewed and verified as hashes. See [Publication.md](Publication.md) for the audit scope and limits.
 
 Memoria has no accounts, analytics, remote telemetry, HTTP server, automatic downloads or fan control.
+
+
+## Applications follow-up — current source
+
+- Expand or collapse an application's processes, individually or across the filtered list.
+- Close a member process, or review the whole application and its bundle helpers together. Inferred descendants require selection. Force killing remains a separate confirmed action; replacements are never added automatically.
+- Refresh Applications memory on entry and every five minutes, with a visible timestamp. CPU, process membership and action revalidation stay current.
+- Default application groups to memory order; add group search and memory, CPU and name sorting.
+
+Both SDK builds and all 77 automated tests passed. Native card rendering passed four presentation cases. Live group termination could not be verified in the restricted session; the attempted fixture action rejected unverifiable targets. The downloadable 0.1.0-preview.1 predates these changes.

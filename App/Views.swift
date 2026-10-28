@@ -49,7 +49,7 @@ struct MainView:View {
         .sheet(isPresented:$model.showWidgetHelp) {WidgetHelpView(model:model)}
         .sheet(isPresented:$model.commandPalette) {CommandPalette(model:model)}
         .alert("Operation result",isPresented:Binding(get:{model.reviewPresenter == "main" && !model.resultMessage.isEmpty},set:{if !$0 {model.resultMessage=""}})) {Button("OK",role:.cancel) {model.resultMessage=""}} message:{Text(model.resultMessage)}
-        .onAppear {model.visibleWindowCount += 1;model.configureSampling()}
+        .onAppear {model.visibleWindowCount += 1;model.configureSampling();Task {await model.refreshApplications(forceMemory:true)}}
         .onDisappear {model.visibleWindowCount=max(0,model.visibleWindowCount-1);model.configureSampling()}
         .onChange(of:model.selected) {_,_ in model.loadDetails()}
     }
@@ -134,17 +134,6 @@ struct MemoryView:View {
         Text("Free pages are not all available memory. Purgeable and speculative values must not be added indiscriminately to other components. Pressure is an operating-system signal, not a percentage of RAM occupancy.").font(.caption).foregroundStyle(.secondary)
         ChartPanel(title:"Active + wired + compressed (bytes)",points:model.histories["memory.accounted"]?.points ?? [])
         GroupBox("Cumulative page activity") {VStack {LabeledContent("Pages read",value:model.snapshot?.memory.map {String($0.pageIns)} ?? "—");LabeledContent("Pages written",value:model.snapshot?.memory.map {String($0.pageOuts)} ?? "—");LabeledContent("Swap pages in / out",value:model.snapshot?.memory.map {"\($0.swapIns) / \($0.swapOuts)"} ?? "—")}.padding(10)}
-    }.padding(24)}}
-}
-struct ApplicationsView:View {
-    @Bindable var model:AppModel
-    var body:some View {ScrollView {LazyVStack(alignment:.leading,spacing:16) {
-        if model.groups.isEmpty {ContentUnavailableView("No application groups visible",systemImage:"app.dashed",description:Text("Processes without an observed application bundle remain in the process table."))}
-        ForEach(model.groups) {group in GroupBox {VStack(alignment:.leading,spacing:12) {
-            HStack {Image(systemName:"app.fill").font(.title2).foregroundStyle(.tint);VStack(alignment:.leading) {Text(group.name).font(.headline);Text("\(group.members.count) processes\(group.accountingIncomplete ? " · partial accounting":"")").font(.caption).foregroundStyle(.secondary)};Spacer();Text(Format.percent(group.cpuPercent)).monospacedDigit();Text(Format.bytes(group.footprintSum)).monospacedDigit()}
-            ForEach(group.members,id:\.process.identity) {member in Button {model.selected=member.process.identity;model.destination = .processes} label:{HStack {Text(member.process.name);Text("\(member.process.identity.pid)").foregroundStyle(.secondary);Spacer();Text(member.membership == .exact ? "Bundle path":"Inferred ancestry").font(.caption).foregroundStyle(.secondary)}}.buttonStyle(.plain)}
-        }.padding(10)}}
-        Text("Bundle-path membership is exact for the observed executable path. Ancestry is inferred and can be incomplete; shared services remain unassigned. Footprints are process-accounting sums, not unique RAM.").font(.caption).foregroundStyle(.secondary)
     }.padding(24)}}
 }
 struct StorageView:View {

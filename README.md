@@ -25,6 +25,10 @@ Each preview includes a plain-language installation file, a build manifest and *
 
 Use the sidebar to choose a resource. **Simple** view shows the main charts, readings and up to ten ranked processes. **Full** view adds detailed tables and an inspector. Choose a ranking metric, click a column heading to sort, and use search and filters to narrow the list. Selecting a process shows its available details.
 
+In the current source build, **Applications → Full** groups related processes under each application. Click the disclosure arrow to expand or collapse a group, or use **Expand All / Collapse All**. Search by application, process name or PID; rank groups by memory, CPU or name. The close menu beside an application reviews its processes together; the close menu beside a process affects only that process. Bundle members are selected automatically in the review. Inferred descendants are labelled and require selection; unassigned shared services are excluded.
+
+Applications memory readings refresh when you open the tab, then every **five minutes**. The last refresh time is shown. CPU and process membership remain live; new processes show an unavailable memory reading until the next refresh. The same memory readings feed the table, inspector and Simple view. Other resource tabs keep their normal sampling rate. These changes are newer than the downloadable 0.1.0-preview.1.
+
 The menu-bar popover gives you compact readings and access to **Quick Task Manager**. Its configurable shortcut is **Control–Shift–Escape**, subject to shortcut availability. Settings lets you choose which readings appear beside the brain.
 
 For process management, try **Quit** first where it is available. **Terminate** requests termination; **Force Kill** requires confirmation and can discard unsaved work. Memoria does not automatically escalate termination to force killing. Process visibility and actions depend on macOS permissions. See [capabilities](Documentation/Capabilities.md) for measurement and permission limits.

@@ -21,7 +21,7 @@ struct ProcessView:View {
         Binding(get:{preferences},set:{model.setProcessListPreferences($0,for:context)})
     }
     private var tree:Bool {preferences.tree && (context == .processes || context == .quick)}
-    private var refresh:RankingRefresh {RankingRefresh(preferences:preferences,sampledAt:model.snapshot?.monotonic,scannedAt:model.scan?.date)}
+    private var refresh:RankingRefresh {RankingRefresh(preferences:preferences,sampledAt:context == .applications ? model.applicationSampleTime:model.snapshot?.monotonic,scannedAt:model.scan?.date)}
     private var selectedInRows:Bool {rows.contains {$0.identity == model.selected}}
     var body:some View {
         VStack(spacing:0) {
@@ -115,8 +115,8 @@ struct ProcessView:View {
         model.setProcessListPreferences(value,for:context)
     }
     private func refreshRows() async {
-        guard let snapshot=model.snapshot else {rows=[];loading=false;error=nil;return}
-        let input=snapshot.processes,settings=preferences,scan=model.scan,uid=getuid()
+        guard model.snapshot != nil else {rows=[];loading=false;error=nil;return}
+        let input=model.displayedProcesses(for:context),settings=preferences,scan=model.scan,uid=getuid()
         loading=true;error=nil
         do {
             let result=try await model.executor.run {settings.apply(to:input,currentUID:uid,scan:scan)}
@@ -196,7 +196,7 @@ struct NativeProcessTable:NSViewRepresentable {
         func tableView(_ tableView:NSTableView,sortDescriptorsDidChange oldDescriptors:[NSSortDescriptor]) {guard !updating,let sort=tableView.sortDescriptors.first,let key=sort.key,let field=ProcessSort(rawValue:key) else{return};sortChanged(field,!sort.ascending)}
         private func useClicked() {guard let table else{return};let row=table.clickedRow >= 0 ? table.clickedRow:table.selectedRow;if rows.indices.contains(row) {model.selected=rows[row].identity}}
         @objc func inspect() {useClicked();model.inspectorVisible=true;model.loadDetails()}
-        @objc func copyPID() {useClicked();if let p=model.selectedProcess {NSPasteboard.general.clearContents();NSPasteboard.general.setString(String(p.identity.pid),forType:.string)}}
+        @objc func copyPID() {useClicked();if let p=model.inspectedProcess {NSPasteboard.general.clearContents();NSPasteboard.general.setString(String(p.identity.pid),forType:.string)}}
         @objc func reveal() {useClicked();if let path=model.selectedProcess?.executable?.path {NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath:path)])}}
         @objc func terminate() {useClicked();model.prepare(.terminate)}
         @objc func force() {useClicked();model.prepare(.forceKill)}
@@ -207,7 +207,7 @@ struct InspectorView:View {
     @Bindable var model:AppModel
     var body:some View {ScrollView {VStack(alignment:.leading,spacing:20) {
         HStack {Text("Inspector").font(.headline);Spacer();Button {model.inspectorVisible=false} label:{Image(systemName:"xmark")}.buttonStyle(.plain).help("Close inspector")}
-        if let p=model.selectedProcess {
+        if let p=model.inspectedProcess {
             Image(systemName:"app.fill").font(.system(size:42)).foregroundStyle(.tint)
             Text(p.name).font(.title2.weight(.semibold)).textSelection(.enabled)
             Text("PID \(p.identity.pid) · \(p.state)").foregroundStyle(.secondary)
@@ -216,6 +216,7 @@ struct InspectorView:View {
             LabeledContent("CPU · whole machine",value:Format.percent(p.cpuPercent.flatMap {DeltaMath.machineCPU(oneCore:$0,coreCount:model.snapshot?.cpuTicks.count ?? 0)}))
             LabeledContent("Physical footprint",value:Format.bytes(p.footprintBytes))
             LabeledContent("Resident memory",value:Format.bytes(p.residentBytes))
+            if model.destination == .applications {ApplicationMemoryCaption(date:model.applicationMemory.date)}
             Button(model.pinned.contains(p.identity) ? "Unpin History":"Pin History") {model.togglePin(p.identity)}
             if let history=model.processHistories[p.identity]?["cpu"] {ChartPanel(title:"Selected process CPU (%)",points:history.downsample(window:300,endingAt:model.snapshot?.monotonic ?? 0))}
             LabeledContent("Parent PID",value:String(p.parentPID));LabeledContent("Owner UID",value:String(p.uid));LabeledContent("Threads",value:p.threads.map(String.init) ?? "—")
@@ -243,15 +244,20 @@ struct ActionConfirmation:View {
     @State private var selected:Set<ProcessIdentity>=[]
     @Environment(\.dismiss) private var dismiss
     var body:some View {VStack(alignment:.leading,spacing:18) {
-        Label(review.query.map {"Free Port \($0.port)"} ?? review.action.title,systemImage:review.action == .forceKill ? "exclamationmark.triangle":"stop.circle").font(.title2.weight(.semibold))
+        Label(review.application.map {"Close \($0.group.name)"} ?? review.query.map {"Free Port \($0.port)"} ?? review.action.title,systemImage:review.action == .forceKill ? "exclamationmark.triangle":"stop.circle").font(.title2.weight(.semibold))
         Text(review.action == .forceKill ? "Force killing stops the selected processes immediately. Unsaved work may be lost.":"SIGTERM requests termination. The process may refuse or continue running; Memoria will not automatically escalate.")
+        if let application=review.application {
+            Text("Review all associated processes below. Bundle members are selected; inferred descendants require your selection. Unassigned shared services are never included. Unsaved work may be lost.").font(.callout)
+            if !application.unavailable.isEmpty {Text("Unverifiable and excluded: "+application.unavailable.map(\.name).joined(separator:", ")).font(.caption).foregroundStyle(.secondary)}
+        }
         Text("Every selected identity and executable will be checked again before signalling. The final PID-based signal still has a residual race window.").font(.caption).foregroundStyle(.secondary)
         if review.administrator {Text("This operation requires separate administrator authorisation through the signed helper.").font(.callout.weight(.medium))}
-        ScrollView {VStack(alignment:.leading,spacing:12) {ForEach(review.targets) {target in Toggle(isOn:Binding(get:{selected.contains(target.identity)},set:{if $0 {selected.insert(target.identity)} else {selected.remove(target.identity)}})) {VStack(alignment:.leading,spacing:3) {Text("\(target.name) · PID \(target.identity.pid)");Text(target.executable.path).font(.caption).foregroundStyle(.secondary)}}}}}.frame(maxHeight:260)
+        ScrollView {VStack(alignment:.leading,spacing:12) {ForEach(review.targets) {target in Toggle(isOn:Binding(get:{selected.contains(target.identity)},set:{if $0 {selected.insert(target.identity)} else {selected.remove(target.identity)}})) {VStack(alignment:.leading,spacing:3) {Text("\(target.name) · PID \(target.identity.pid)");if review.application?.inferred.contains(target.identity) == true {Text("Inferred ancestry · optional").font(.caption).foregroundStyle(.secondary)};Text(target.executable.path).font(.caption).foregroundStyle(.secondary)}}}}}.frame(maxHeight:260)
         if review.treeRoot != nil {Text("Tree membership is a snapshot. Descendants are listed before the parent. Shared or inferred helpers are initially excluded.").font(.caption).foregroundStyle(.secondary)}
         HStack {Spacer();Button("Cancel",role:.cancel) {dismiss()}.keyboardShortcut(.cancelAction);Button(review.action == .forceKill ? "Force Kill Selected":"Terminate Selected",role:.destructive) {model.perform(review,selected:selected)}.disabled(selected.isEmpty).keyboardShortcut(.defaultAction)}
     }.padding(26).frame(width:620).onAppear {
-        if let root=review.treeRoot,let process=model.snapshot?.processes.first(where:{$0.identity == root}) {
+        if let application=review.application {selected=application.defaultSelection}
+        else if let root=review.treeRoot,let process=model.snapshot?.processes.first(where:{$0.identity == root}) {
             let bundle=process.executable.flatMap {ApplicationGrouping.bundlePath($0.path)}
             selected=Set(review.targets.filter {$0.identity == root || (bundle != nil && ApplicationGrouping.bundlePath($0.executable.path) == bundle)}.map(\.identity))
         } else {selected=Set(review.targets.map(\.identity))}

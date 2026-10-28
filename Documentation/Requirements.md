@@ -292,3 +292,14 @@ Status: Not started → Implemented → Verified, or Blocked externally / Unavai
 | U.02 | Complete development app with executable permissions and portable libraries | Makefile; Scripts/doctor.py; Scripts/verify-app.py | 1 | Clean-checkout app/test workflow and bundle verification | Per-preview build manifest and release notes | Implemented |
 | U.03 | Finder installation ZIP with provenance and checksums | Scripts/package-preview.py; Scripts/build_support.py | 1 | Dirty/stale/partial rejection; archive extraction and integrity | Per-preview manifest; unsigned preview is not a production-release pass | Implemented |
 | U.04 | Normal signed consumer installation | Documentation/Distribution.md | 1 | Developer ID, notarisation, external Gatekeeper and installation checks | Signing credentials absent; full installation acceptance pending | Blocked externally |
+
+
+## Applications follow-up
+
+| ID | Requirement | Implementation | Tier | Tests | Evidence | Status |
+|---|---|---|---|---|---|---|
+| AP.01 | Expand or collapse each application, and all visible groups | App/ApplicationsView.swift; stable group expansion state | 1 | Native expanded/collapsed and narrow dark component renders | Documentation/Verification.md; full-window interaction pending | Implemented |
+| AP.02 | Close one process from its application group | AppModel.prepareApplicationProcess; existing action review/coordinator | 1 | Identity/exec rejection tests; SDK build | Documentation/Verification.md; live GUI action pending | Implemented |
+| AP.03 | Review and close all verifiable application members, including independent bundle helpers | ApplicationActionPlan; AppModel.prepareApplication; survivor rescan | 1 | Children-first scope, inferred opt-in, unavailable targets, replacement and denial tests | Documentation/Verification.md; native fixture identity verification unavailable in session | Implemented |
+| AP.04 | Refresh Applications memory on entry and every five minutes, keeping actions current | ApplicationMemorySnapshot; table, inspector and Simple-view adapters | 1 | Seven added application test functions; monotonic 300-second boundary and cache invalidation | Documentation/Verification.md; full-window timed acceptance pending | Implemented |
+| AP.05 | Stable default memory ordering, with application search and alternate sorts | App/ApplicationsView.swift | 1 | SDK build and component renders; end-to-end sorting interaction pending | Documentation/Verification.md | Implemented |

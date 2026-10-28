@@ -16,9 +16,10 @@ struct SimpleDashboardView:View {
                 } else {
                     LazyVGrid(columns:columns,spacing:16) {
                         MetricCard(title:"CPU",value:model.cpuText,detail:"Whole machine",symbol:"cpu")
-                        MetricCard(title:"Accounted memory",value:Format.bytes(model.snapshot?.memory?.accounted),detail:"Active + wired + compressed",symbol:"memorychip",tint:.purple)
+                        MetricCard(title:"Accounted memory",value:Format.bytes(context == .applications ? model.applicationMemory.systemAccounted:model.snapshot?.memory?.accounted),detail:"Active + wired + compressed",symbol:"memorychip",tint:.purple)
                     }
                 }
+                if context == .applications {ApplicationMemoryCaption(date:model.applicationMemory.date)}
                 SimpleCharts(model:model,context:context)
                 SimpleTopProcesses(model:model,context:context)
             }.padding(20)
@@ -32,7 +33,7 @@ private struct SimpleCharts:View {
     private let columns=[GridItem(.adaptive(minimum:300),spacing:16)]
     private var window:Double {context == .history ? Double(model.historyWindow.rawValue):60}
     private func points(_ id:String,scale:Double=1) -> [HistoryPoint] {
-        (model.histories[id]?.downsample(window:window,endingAt:model.snapshot?.monotonic ?? 0) ?? [])
+        (model.histories[id]?.downsample(window:window,endingAt:(context == .applications && id == "memory.accounted" ? model.applicationMemory.monotonic:model.snapshot?.monotonic) ?? 0) ?? [])
             .map {HistoryPoint(date:$0.date,monotonic:$0.monotonic,value:$0.value.map {$0/scale})}
     }
     var body:some View {
@@ -202,7 +203,7 @@ private struct SimpleTopProcesses:View {
     @State private var ranking:TopProcesses?
     @State private var error:String?
     private var metric:ProcessSort {model.simpleProcessMetrics[context] ?? context.defaultSort}
-    private var refresh:SimpleRankingRefresh {SimpleRankingRefresh(context:context,metric:metric,sampledAt:model.snapshot?.monotonic)}
+    private var refresh:SimpleRankingRefresh {SimpleRankingRefresh(context:context,metric:metric,sampledAt:context == .applications ? model.applicationSampleTime:model.snapshot?.monotonic)}
     var body:some View {
         GroupBox {
             VStack(alignment:.leading,spacing:10) {
@@ -257,8 +258,8 @@ private struct SimpleTopProcesses:View {
         }
     }
     private func updateRanking() async {
-        guard let snapshot=model.snapshot else {ranking=nil;error=nil;return}
-        let input=snapshot.processes,context=self.context,metric=self.metric,uid=getuid()
+        guard model.snapshot != nil else {ranking=nil;error=nil;return}
+        let input=model.displayedProcesses(for:context),context=self.context,metric=self.metric,uid=getuid()
         do {
             let result=try await model.executor.run {TopProcesses.rank(input,context:context,metric:metric,currentUID:uid)}
             guard !Task.isCancelled else {return}
