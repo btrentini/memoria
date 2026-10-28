@@ -45,3 +45,10 @@ Memoria has no accounts, analytics, remote telemetry, HTTP server, automatic dow
 - Default application groups to memory order; add group search and memory, CPU and name sorting.
 
 Both SDK builds and all 77 automated tests passed. Native card rendering passed four presentation cases. Live group termination could not be verified in the restricted session; the attempted fixture action rejected unverifiable targets. The downloadable 0.1.0-preview.1 predates these changes.
+
+
+## Sidebar resizing fix — current source
+
+The sidebar, content and inspector now share one native horizontal split. This fixes content growing beyond the window while resizing or revealing the sidebar. The toolbar sidebar button and Control–Command–S show or hide navigation, and the visibility preference is remembered. A new `make layout-test` exercises the production window without starting collectors or process actions.
+
+Validation: both SDK builds, 77 existing tests and 292 native layout assertions passed. The layout suite checks actual window/pane bounds and the sidebar keyboard shortcut; full visual and accessibility acceptance remain separate.

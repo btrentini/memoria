@@ -29,6 +29,8 @@ In the current source build, **Applications → Full** groups related processes 
 
 Applications memory readings refresh when you open the tab, then every **five minutes**. The last refresh time is shown. CPU and process membership remain live; new processes show an unavailable memory reading until the next refresh. The same memory readings feed the table, inspector and Simple view. Other resource tabs keep their normal sampling rate. These changes are newer than the downloadable 0.1.0-preview.1.
 
+Use the **sidebar button** in the toolbar, or **Control–Command–S**, to hide or show navigation. Drag the dividers to resize the sidebar and inspector; the content keeps its own usable width.
+
 The menu-bar popover gives you compact readings and access to **Quick Task Manager**. Its configurable shortcut is **Control–Shift–Escape**, subject to shortcut availability. Settings lets you choose which readings appear beside the brain.
 
 For process management, try **Quit** first where it is available. **Terminate** requests termination; **Force Kill** requires confirmation and can discard unsaved work. Memoria does not automatically escalate termination to force killing. Process visibility and actions depend on macOS permissions. See [capabilities](Documentation/Capabilities.md) for measurement and permission limits.
@@ -95,10 +97,13 @@ For normal Xcode development, open **Memoria.xcodeproj** and choose the shared *
 ```sh
 make test
 make verify-app
+make layout-test
 make preview-package
 ```
 
-`make test` builds and runs the core/service tests and the separate Store/lifecycle tests. The current suite contains **65 tests**. It uses bounded disposable fixtures; it does not authorise testing destructive actions on everyday applications or another user’s processes. GUI, signed-helper, widget, sleep/resume and installation checks are separate parts of the [acceptance plan](Documentation/Acceptance.md).
+`make test` builds and runs the core/service tests and the separate Store/lifecycle tests. The current suite contains **77 tests**. It uses bounded disposable fixtures; it does not authorise testing destructive actions on everyday applications or another user’s processes. GUI, signed-helper, widget, sleep/resume and installation checks are separate parts of the [acceptance plan](Documentation/Acceptance.md).
+
+`make layout-test` requires a logged-in macOS desktop. It opens a disposable window using the production interface, checks resizing and sidebar controls across Full/Simple views, then closes it. It collects no live process data and performs no process actions. Synthetic screenshots and results remain in the ignored build directory. If a restricted runner cannot launch the GUI, `python3 Scripts/check-layout.py --prepare-only` prints the separate launch command; preparation alone is not a test pass.
 
 `make verify-app` checks the bundle’s executable permissions, ARM64 binaries, local library dependencies, resources and signatures. `make preview-package` creates a Finder-installable preview ZIP, installation instructions, a source revision manifest and checksums in **build/distribution**. It refuses a dirty or stale source tree, so commit the intended changes and rebuild first. Packaging does not confer Developer ID signing or notarisation. The [distribution guide](Documentation/Distribution.md) describes the public-release gates.
 

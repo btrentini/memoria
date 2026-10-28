@@ -303,3 +303,11 @@ Status: Not started → Implemented → Verified, or Blocked externally / Unavai
 | AP.03 | Review and close all verifiable application members, including independent bundle helpers | ApplicationActionPlan; AppModel.prepareApplication; survivor rescan | 1 | Children-first scope, inferred opt-in, unavailable targets, replacement and denial tests | Documentation/Verification.md; native fixture identity verification unavailable in session | Implemented |
 | AP.04 | Refresh Applications memory on entry and every five minutes, keeping actions current | ApplicationMemorySnapshot; table, inspector and Simple-view adapters | 1 | Seven added application test functions; monotonic 300-second boundary and cache invalidation | Documentation/Verification.md; full-window timed acceptance pending | Implemented |
 | AP.05 | Stable default memory ordering, with application search and alternate sorts | App/ApplicationsView.swift | 1 | SDK build and component renders; end-to-end sorting interaction pending | Documentation/Verification.md | Implemented |
+
+
+## Sidebar resizing follow-up
+
+| ID | Requirement | Implementation | Tier | Tests | Evidence | Status |
+|---|---|---|---|---|---|---|
+| UI.01 | Keep navigation, content and inspector within the window when resizing | App/Views.swift; single horizontal split and pane width limits | 1 | Production layout at minimum/wide widths, native divider movement, repeated resize, all destinations and modes | Documentation/Verification.md; 292 layout assertions passed | Verified |
+| UI.02 | Reliably hide and restore the sidebar | Toolbar toggle, Control–Command–S, persisted visibility | 1 | Native keyboard-equivalent dispatch and resulting pane counts | Documentation/Verification.md | Verified |

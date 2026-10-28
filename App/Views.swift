@@ -7,15 +7,20 @@ import MemoriaServices
 
 struct MainView:View {
     @Bindable var model:AppModel
-    @State private var visibility:NavigationSplitViewVisibility = .all
+    @AppStorage("sidebarVisible") private var sidebarVisible=true
     var body:some View {
-        NavigationSplitView(columnVisibility:$visibility) {
-            VStack(alignment:.leading,spacing:24) {
-                HStack(spacing:10) {BrandMark(size:24).foregroundStyle(.tint);VStack(alignment:.leading,spacing:1) {Text("Memoria").font(.title3.weight(.semibold));Text("SYSTEM MONITOR").font(.system(size:9,weight:.medium,design:.rounded)).tracking(1.8).foregroundStyle(.secondary)}}.padding(.horizontal,12).padding(.top,20)
-                List(Destination.allCases,selection:$model.destination) {destination in Label(destination.rawValue,systemImage:destination.symbol).tag(destination).padding(.vertical,3)}.listStyle(.sidebar)
-                VStack(alignment:.leading,spacing:5) {Label(model.sleeping ? "Monitoring paused":"Local monitoring",systemImage:model.sleeping ? "pause.circle":"circle.fill").font(.caption).foregroundStyle(model.sleeping ? Color.secondary:Color.green);Text("\(model.snapshot?.cpuTicks.count ?? 0) logical cores · \(Format.bytes(model.snapshot?.memory?.total))").font(.caption2).foregroundStyle(.secondary)}.padding(16)
-            }.navigationSplitViewColumnWidth(min:185,ideal:205,max:260)
-        } detail: {
+        // Keep all horizontal panes in one native split. Nested navigation and
+        // inspector containers can feed inflated minimum widths back into layout.
+        HSplitView {
+            if sidebarVisible {
+                VStack(alignment:.leading,spacing:24) {
+                    HStack(spacing:10) {BrandMark(size:24).foregroundStyle(.tint);VStack(alignment:.leading,spacing:1) {Text("Memoria").font(.title3.weight(.semibold));Text("SYSTEM MONITOR").font(.system(size:9,weight:.medium,design:.rounded)).tracking(1.8).foregroundStyle(.secondary)}}.padding(.horizontal,12).padding(.top,20)
+                    List(Destination.allCases,selection:$model.destination) {destination in Label(destination.rawValue,systemImage:destination.symbol).tag(destination).padding(.vertical,3)}.listStyle(.sidebar)
+                    VStack(alignment:.leading,spacing:5) {Label(model.sleeping ? "Monitoring paused":"Local monitoring",systemImage:model.sleeping ? "pause.circle":"circle.fill").font(.caption).foregroundStyle(model.sleeping ? Color.secondary:Color.green);Text("\(model.snapshot?.cpuTicks.count ?? 0) logical cores · \(Format.bytes(model.snapshot?.memory?.total))").font(.caption2).foregroundStyle(.secondary)}.padding(16)
+                }.frame(minWidth:220,idealWidth:240,maxWidth:300,maxHeight:.infinity,alignment:.topLeading)
+                    .background(.regularMaterial)
+                    .accessibilityIdentifier("monitor-sidebar")
+            }
             VStack(spacing:0) {
                 HStack(alignment:.firstTextBaseline) {VStack(alignment:.leading,spacing:5) {Text(model.destination.rawValue).font(.largeTitle.weight(.semibold));Text(subtitle).font(.subheadline).foregroundStyle(.secondary)};Spacer();if model.operationRunning {ProgressView().controlSize(.small)}}.padding(24)
                 Divider()
@@ -32,10 +37,22 @@ struct MainView:View {
                 }
                 Divider()
                 HStack {Text(model.sleeping ? "Paused for sleep":model.snapshot == nil ? "Waiting for system providers…":"\(model.snapshot?.processes.count ?? 0) visible processes");Spacer();if let date=model.snapshot?.date {Text("Updated \(date.formatted(date:.omitted,time:.standard))")};Text("Tier 1 · Native")}.font(.caption).foregroundStyle(.secondary).padding(.horizontal,20).padding(.vertical,9)
-            }.background(Color(nsColor:.windowBackgroundColor))
-            .inspector(isPresented:Binding(get:{!model.simplifiedView && model.inspectorVisible},set:{if !model.simplifiedView {model.inspectorVisible=$0}})) {InspectorView(model:model).inspectorColumnWidth(min:250,ideal:285,max:380)}
+            }.frame(minWidth:520,idealWidth:800,maxWidth:.infinity,minHeight:0,maxHeight:.infinity)
+                .background(Color(nsColor:.windowBackgroundColor))
+            if !model.simplifiedView && model.inspectorVisible {
+                InspectorView(model:model).frame(minWidth:250,idealWidth:285,maxWidth:380)
+                    .frame(maxHeight:.infinity,alignment:.top)
+                    .background(Color(nsColor:.windowBackgroundColor))
+            }
         }
+        .background(Color(nsColor:.windowBackgroundColor))
         .toolbar {
+            ToolbarItem(placement:.navigation) {
+                Button {sidebarVisible.toggle()} label:{Label("Toggle Sidebar",systemImage:"sidebar.left")}
+                    .keyboardShortcut("s",modifiers:[.command,.control])
+                    .help(sidebarVisible ? "Hide navigation sidebar":"Show navigation sidebar")
+                    .accessibilityIdentifier("toggle-sidebar")
+            }
             ToolbarItemGroup {
                 Picker("View",selection:$model.simplifiedView) {
                     Text("Full").tag(false);Text("Simple").tag(true)
