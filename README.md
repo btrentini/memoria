@@ -33,6 +33,8 @@ For process management, try **Quit** first where it is available. **Terminate** 
 
 Closing the monitor keeps the menu-bar readings running. Choose **Quit Memoria** from its menu to stop the app.
 
+The current source build reuses the running monitor when another copy of the same edition opens. The downloadable **0.1.0-preview.1** predates this guard. Quit Memoria first when switching builds.
+
 In **Settings → General → Background and startup**, you can:
 
 - Enable **Show Memoria in the Dock** if you prefer a Dock entry.

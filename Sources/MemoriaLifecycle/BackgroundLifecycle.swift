@@ -76,8 +76,53 @@ public enum LoginInstallation {
 }
 @MainActor public final class BackgroundApplicationDelegate:NSObject,NSApplicationDelegate {
     public static let reopenNotification=Notification.Name("MemoriaOpenMonitor")
+    private var instanceLease:SingleInstanceLease?
+    private var reopenObserver:NSObjectProtocol?
+    private var finishedLaunching=false
+    private var pendingReopen=false
+    private var duplicateLaunch=false
+    public func applicationWillFinishLaunching(_ notification:Notification) {
+        guard let identifier=Bundle.main.bundleIdentifier else {return}
+        let request=Notification.Name(identifier+".showExistingMonitor")
+        // No payload or process actions: this notification can only open our UI.
+        reopenObserver=DistributedNotificationCenter.default().addObserver(forName:request,object:nil,queue:.main) {[weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self,self.instanceLease != nil else {return}
+                if self.finishedLaunching {NotificationCenter.default.post(name:Self.reopenNotification,object:nil)}
+                else {self.pendingReopen=true}
+            }
+        }
+        do {
+            let lock=FileManager.default.temporaryDirectory.appendingPathComponent(identifier+".instance.lock")
+            instanceLease=try SingleInstanceLease.acquire(at:lock)
+            if instanceLease == nil {
+                duplicateLaunch=true
+                DistributedNotificationCenter.default().postNotificationName(request,object:nil,userInfo:nil,deliverImmediately:true)
+                NSApp.terminate(nil)
+            }
+        } catch {
+            duplicateLaunch=true
+            let alert=NSAlert()
+            alert.messageText="Memoria could not start"
+            alert.informativeText="The single-instance lock could not be opened. "+error.localizedDescription
+            alert.runModal()
+            NSApp.terminate(nil)
+        }
+    }
     public func applicationDidFinishLaunching(_ notification:Notification) {
+        guard !duplicateLaunch else {return}
+        finishedLaunching=true
         NSApp.setActivationPolicy(UserDefaults.standard.bool(forKey:"showDockIcon") ? .regular:.accessory)
+        if pendingReopen {
+            DispatchQueue.main.async {NotificationCenter.default.post(name:Self.reopenNotification,object:nil)}
+            pendingReopen=false
+        }
+    }
+    public func applicationWillTerminate(_ notification:Notification) {
+        if let reopenObserver {DistributedNotificationCenter.default().removeObserver(reopenObserver)}
+        reopenObserver=nil
+        // The descriptor remains owned until process teardown. Releasing it here
+        // could admit a new collector while the old one is still shutting down.
     }
     public func applicationShouldTerminateAfterLastWindowClosed(_ sender:NSApplication) -> Bool {false}
     public func applicationShouldHandleReopen(_ sender:NSApplication,hasVisibleWindows:Bool) -> Bool {
