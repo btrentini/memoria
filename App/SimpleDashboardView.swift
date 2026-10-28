@@ -11,9 +11,13 @@ struct SimpleDashboardView:View {
     var body:some View {
         ScrollView {
             VStack(alignment:.leading,spacing:18) {
-                LazyVGrid(columns:columns,spacing:16) {
-                    MetricCard(title:"CPU",value:model.cpuText,detail:"Whole machine",symbol:"cpu")
-                    MetricCard(title:"Accounted memory",value:Format.bytes(model.snapshot?.memory?.accounted),detail:"Active + wired + compressed",symbol:"memorychip",tint:.purple)
+                if context == .memory {
+                    MemoryUsageSummary(used:model.snapshot?.memory?.accounted,total:model.snapshot?.memory?.total)
+                } else {
+                    LazyVGrid(columns:columns,spacing:16) {
+                        MetricCard(title:"CPU",value:model.cpuText,detail:"Whole machine",symbol:"cpu")
+                        MetricCard(title:"Accounted memory",value:Format.bytes(model.snapshot?.memory?.accounted),detail:"Active + wired + compressed",symbol:"memorychip",tint:.purple)
+                    }
                 }
                 SimpleCharts(model:model,context:context)
                 SimpleTopProcesses(model:model,context:context)

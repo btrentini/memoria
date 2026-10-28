@@ -56,7 +56,7 @@ for name, folder, product_type, file_type, product_name, dependencies in specs:
     files = []
     builds = []
     paths=sorted((ROOT/folder).glob("*.swift"))
-    if name == "MemoriaStore": paths.append(ROOT/"App/WidgetPublisher.swift")
+    if name == "MemoriaStore": paths.extend([ROOT/"App/WidgetPublisher.swift",ROOT/"App/MemoryUsageSummary.swift"])
     if name in {"MemoriaStore","MemoriaWidget","MemoriaStoreWidget"}: paths.append(ROOT/"App/BrandMark.swift")
     for path in paths:
         file = add("file:"+str(path.relative_to(ROOT)), isa="PBXFileReference", lastKnownFileType="sourcecode.swift",

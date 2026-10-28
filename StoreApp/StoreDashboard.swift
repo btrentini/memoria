@@ -23,6 +23,9 @@ struct StoreDashboard:View {
                         BrandMark(size:32).foregroundStyle(.tint)
                     }
                     if model.selection == .privacy {StorePrivacy()} else {
+                        if model.selection == .memory {
+                            MemoryUsageSummary(used:model.snapshot?.memory?.accounted,total:model.snapshot?.memory?.total)
+                        }
                         readings
                         if [.overview,.cpu,.memory].contains(model.selection) {
                             GroupBox(model.selection == .memory ? "Accounted memory · last hour":"Whole-machine CPU · last hour") {

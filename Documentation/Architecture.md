@@ -34,6 +34,8 @@ PROC_PIDTASKINFO totals are Mach absolute ticks. The C bridge converts them usin
 
 Page counts are multiplied by Mach's page size. Active, inactive, wired, compressor storage, free, speculative and purgeable values retain their own labels. The overview's accounted memory is active + wired + compressor physical storage. This named accounting sum does not claim Activity Monitor equivalence. Purgeable can overlap other categories; free pages are not the whole of available memory.
 
+The Memory tab presents this accounting sum prominently as **Memory used**, alongside installed RAM, its percentage and a usage bar. The formula remains visible below the total. Full and Simple layouts, including the Store edition, share this summary. Swap and operating-system pressure remain separate; unavailable or inconsistent capacity readings do not produce a fabricated percentage.
+
 Swap comes from vm.swapusage. Pressure comes from public Dispatch notifications; before the first notification it is unknown, rather than inferred from occupancy. Process resident memory and footprint are separate fields. Application footprint totals are process-accounting sums and may count shared physical pages repeatedly.
 
 ## Processes, applications and sockets

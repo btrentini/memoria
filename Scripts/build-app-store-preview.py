@@ -16,7 +16,7 @@ if not args.bundle_only:
     for old in ['libMemoriaWidgetSupport.dylib','libMemoriaStoreMetrics.dylib']:(out/old).unlink(missing_ok=True)
     for name,extra in [('MemoriaLifecycle',['-framework','ServiceManagement']),('MemoriaWidgetSupport',['-application-extension']),('MemoriaStoreMetrics',['-I',str(root/'Sources/MemoriaStoreNative/include'),str(out/'store-native.o'),'-framework','IOKit'])]:
         run([bin/'swiftc',*flags,'-enable-testing','-parse-as-library','-emit-module','-emit-library','-static','-module-name',name,'-emit-module-path',out/(name+'.swiftmodule'),'-o',out/('lib'+name+'.a'),*extra,*sorted((root/'Sources'/name).glob('*.swift'))])
-    for name,files,extra in [('MemoriaStore',[*sorted((root/'StoreApp').glob('*.swift')),root/'App/WidgetPublisher.swift',root/'App/BrandMark.swift'],['-lMemoriaStoreMetrics','-lMemoriaWidgetSupport','-lMemoriaLifecycle']),('MemoriaStoreWidget',[*list((root/'Widget').glob('*.swift')),root/'App/BrandMark.swift'],['-lMemoriaWidgetSupport','-application-extension'])]:
+    for name,files,extra in [('MemoriaStore',[*sorted((root/'StoreApp').glob('*.swift')),root/'App/WidgetPublisher.swift',root/'App/BrandMark.swift',root/'App/MemoryUsageSummary.swift'],['-lMemoriaStoreMetrics','-lMemoriaWidgetSupport','-lMemoriaLifecycle']),('MemoriaStoreWidget',[*list((root/'Widget').glob('*.swift')),root/'App/BrandMark.swift'],['-lMemoriaWidgetSupport','-application-extension'])]:
         run([bin/'swiftc',*flags,'-parse-as-library','-module-name',name,'-Xlinker','-rpath','-Xlinker','@executable_path/../Frameworks',*extra,*files,'-o',out/name])
 app=out/'MemoriaStore.app'
 if app.exists():shutil.rmtree(app)
